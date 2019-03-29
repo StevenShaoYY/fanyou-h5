@@ -1,0 +1,70 @@
+/**
+* 作品：keven
+* https://juejin.im/post/5a31f53f51882555cc41deda
+* https://juejin.im/post/58f79ad4da2f60005d52120d
+* sass变量详解——你不知道的sass。  https://juejin.im/post/58f79ad4da2f60005d52120d
+* Sass使用例子总结  https://www.jianshu.com/p/680aea02eba4
+* 几个实用的Sass mixins  https://www.w3ctrain.com/2016/02/21/useful-sass-mixins/
+* SASS用法介绍  http://www.imbeta.cn/sassyong-fa-jie-shao.html#sassyong-fa-jie-shao
+* Sass的表达式和控制命令　if篇  https://www.jianshu.com/p/8e3bf253ff6b
+* 更新：2017年12月14日
+* 简介：1. 一个基于 Less 的样式工具库，封装了常用 mixin，帮助您更轻松地书写 Less 代码。
+*       2. 只在调用时才输出代码，减少代码冗余，避免样式污染
+*       3. 不自带兼容前缀，减少代码量，而建议采用工具生成，如 postcss、Autoprefixer、less-plugin-autoprefix 等
+*       4. 附带 IE 各类 Hack
+*/
+
+/*-------------------------------------
+├   布局                              ┆
+└------------------------------------*/
+// 颜色定义规范
+$color-background: #222;
+$color-background-d: rgba(0, 0, 0, 0.3);
+$color-highlight-background: #333;
+$color-dialog-background: #666;
+$color-theme: #ffcd32;
+$color-theme-d: rgba(255, 205, 49, 0.5);
+$color-sub-theme: #d93f30;
+$color-text: #fff;
+$color-text-d: rgba(255, 255, 255, 0.3);
+$color-text-l: rgba(255, 255, 255, 0.5);
+$color-text-ll: rgba(255, 255, 255, 0.8);
+
+//字体定义规范
+$font-size-small-s: 10px;
+$font-size-small: 12px;
+$font-size-medium: 14px;
+$font-size-medium-x: 16px;
+$font-size-large: 18px;
+$font-size-large-x: 22px;
+
+// 盒子宽高
+@mixin size($w, $h) { width: $w; height: $h; }
+
+// 最小尺寸, 兼容IE6
+@mixin min-width($min-w) { min-width: $min-w; _width: $min-w; }
+@mixin min-height($min-h) { min-height: $min-h; _height: $min-h; }
+
+// 内联块级元素, 兼容IE6
+// 这个是一种CSS hack写法
+// IE6识别*和_， 不识别 !important
+// IE7识别*, 不识别_，识别 !important
+// 而firefox两个都不识别， 识别 !important
+.dib { display: inline-block; *display: inline; *zoom: 1; }
+
+// 固定定位, 兼容IE6
+.fixed { position: fixed; _position: absolute; *zoom: 1; }
+
+// 统一盒模型
+.border-box {
+  *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+}
+
+// row column
+@mixin box-center($direction:row) { 
+  @if $direction == row  {text-align: center; }
+  @else if $direction == column {display: flex; 
+    justify-content: center;
+    align-items: center;;}
+}
+
