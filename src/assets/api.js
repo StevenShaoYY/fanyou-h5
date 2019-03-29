@@ -1,0 +1,1 @@
+export const axiosHeaders = {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
