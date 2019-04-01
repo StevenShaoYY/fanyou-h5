@@ -62,7 +62,7 @@ module.exports = {
                 target: 'https://test.fanyoutech.com:7002',                
                 changOrigin: true,
                 pathRewrite: {
-                  '^/user': '/user/api'
+                  '^/user': '/user/userBase'
                 }
             }
         },

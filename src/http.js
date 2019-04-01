@@ -16,11 +16,11 @@ function endLoading() {
 axios.interceptors.request.use(config => {
     // 加载动画
     startLoading();
-    config.headers['ACCESS_TOKEN'] = '14eeef49ffd34b558d911945b9410a1d'
+    // config.headers['ACCESS_TOKEN'] = '7650f0c667d541a1ad55def0db1d58ae'
 
-    if (localStorage.eleToken) {
+    if (localStorage.ACCESSToken) {
       // 设置统一的请求header
-      config.headers.Authorization = localStorage.eleToken;
+      config.headers['ACCESS_TOKEN'] = localStorage.ACCESSToken;
     }
 
     return config;
