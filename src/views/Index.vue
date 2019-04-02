@@ -9,21 +9,13 @@
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
     <ul class="nav">
-      <li>
-        <div class="navImg"></div>
-        <span class="navTxt">台式机</span>
-      </li>
-      <li>
-        <div class="navImg"></div>
-        <span class="navTxt">手机</span>
-      </li>
-      <li>
-        <div class="navImg"></div>
-        <span class="navTxt">游戏机</span>
-      </li>
-      <li>
-        <div class="navImg"></div>
-        <span class="navTxt">数码潮品</span>
+      <li v-for="(item, i) in categoryList" :key="item.id">
+        <a :href="item.categoryUrl">
+        <div class="navImg">
+          <img :src="item.iconUrl" />
+        </div>
+        <span class="navTxt">{{item.name}}</span>
+        </a>
       </li>
     </ul>
     <section class="hot-wrapper" v-for="item of topic" :key="item.id" >
@@ -135,16 +127,26 @@ export default {
       display: flex;
       flex-direction: column;
       height: 120px;
-      .navImg{
-        height: 80px;
-        width: 100%;
-      }
-      .navTxt{
-        display: flex;
-        flex: 1px;
-        font-size: px2rem(16);
-        justify-content: center;
-        align-items: center;        
+      a{
+        text-decoration: none;
+        .navImg{
+          height: 80px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img{
+            width: 80%;
+          }
+        }
+        .navTxt{
+          display: flex;
+          flex: 1px;
+          color: #2c3e50;
+          font-size: px2rem(16);
+          justify-content: center;
+          align-items: center;        
+        }
       }
     }
   }

@@ -8,7 +8,7 @@
     </div>
     <div class="form">
       <div class="identifyingCode"><mt-field placeholder="请输入验证码" v-model="code"></mt-field></div>
-      <div class="identifyingCodeBtn" @click="getCode" :class="[isSendCode?'available':'disabled']">获取验证码</div>
+      <!-- <div class="identifyingCodeBtn" @click="getCode" :class="[isSendCode?'available':'disabled']">获取验证码</div> -->
     </div>
 
     <div class="btn">
@@ -55,7 +55,7 @@ export default {
     },
     login() {
       if(this.mobile && this.code){
-        this.$axios.post('/user/sendMessage',
+        this.$axios.post('/user/login',
           {
             code: this.code,
             mobile: this.mobile
@@ -64,8 +64,10 @@ export default {
         ).then(res => {
           let result = res.data.result;
           console.log('res: ', res)
-          if(result.ok){
-            router.push("/index")
+          if(res.data.ok){
+            localStorage.setItem('ACCESS_TOKEN', result.accessToken);
+            // return;
+            this.$router.push("/index")
           }
         })
       }else{

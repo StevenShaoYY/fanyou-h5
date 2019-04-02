@@ -18,9 +18,10 @@ axios.interceptors.request.use(config => {
     startLoading();
     // config.headers['ACCESS_TOKEN'] = '7650f0c667d541a1ad55def0db1d58ae'
 
-    if (localStorage.ACCESSToken) {
+    if (localStorage.getItem('ACCESS_TOKEN')) {
       // 设置统一的请求header
-      config.headers['ACCESS_TOKEN'] = localStorage.ACCESSToken;
+      config.headers['ACCESS_TOKEN'] = localStorage.getItem('ACCESS_TOKEN');
+      // config.headers['ACCESS_TOKEN'] = '7650f0c667d541a1ad55def0db1d58ae'
     }
 
     return config;
@@ -31,22 +32,28 @@ axios.interceptors.request.use(config => {
 // 响应拦截
 axios.interceptors.response.use(response => {
   // 结束加载动画
-  endLoading();
+  // endLoading();
+  console.log('response');
+  console.log('response: ', response);
   return response;
 }, error => {
   // 错误提醒
-  endLoading();
+  // endLoading();
+  console.log('error: ', error)
+  console.log('error.response: ', error.response)
   // Message.error(error.response.data);
 
   // 获取错误状态码
-  const { status } = error.response;
-  // if (status == 401) {
-  //   // Message.error('token失效,请重新登录！');
-  //   // 清除token
-  //   localStorage.removeItem('eleToken');
-  //   // 跳转到登录页面
-  //   router.push("/login")
-  // }
+  const { status, data } = error.response;
+  console.log('status: ', status)
+  if (!data.ok) {
+    // Message.error(status.data.msg);
+    alert(data.msg)
+    // 清除token
+    localStorage.removeItem('ACCESS_TOKEN');
+    // 跳转到登录页面
+    router.push("/login")
+  }
 
   return Promise.reject(error)
 })

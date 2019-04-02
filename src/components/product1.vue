@@ -1,55 +1,58 @@
 <template>
   <div class="wrapper">
-    <navigator class="product-item" :url="productItem.goodsDetailUrl">
+    <a class="product-item" :href="productItem.goodsDetailUrl">
       <img class="img" :src="productItem.picUrl" background-size="cover" />
       <div class="title">{{productItem.name}}</div>
       <div class="price">¥{{productItem.rentPrice.toFixed(2)}}/{{productItem.periodUnit}}起</div>
-    </navigator>
+    </a>
   </div>
 </template>
-<style scoped>
+<style lang='scss' scoped>
+@import '../assets/styles/global';
     .iconfont {
         font-family:iconfont;
         font-family:microsoft yahei;
     }
     .wrapper{
         background-color: #F9F9F9;
-        border-radius: 15rpx;
-        width: 330rpx;
-        height: 360rpx;
-        margin-top: 20rpx;     
+        border-radius: px2rem(7);
+        width: px2rem(140);
+        height: px2rem(180);
+        margin-top: px2rem(10);     
     }
     .product-item {
-      width: 330rpx;
-      height: 360rpx;
+      width: px2rem(140);
+      height: px2rem(180);
+      text-decoration: none;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center; 
     }
     .img {
-      width: 180rpx;
-      height: 205rpx;
+      width: px2rem(90);
+      height: px2rem(102);
     }
     .title {
-      font-size: 28rpx;
+      font-size: px2rem(14);
       font-weight: 400;
       /* padding: 0 20rpx; */
       color: #A9A9A9;
-      width: 290rpx;
-      margin-left: 20rpx;
+      width: px2rem(145);;
+      margin-left: px2rem(10);
       text-align: center;
       white-space:nowrap;
       text-overflow: ellipsis;
       overflow:hidden;
-      margin-top: 10rpx;
-      line-height: 30rpx;
+      margin-top: px2rem(5);
+      line-height: px2rem(15);
     }
     .price {
-      line-height: 32rpx;
-      font-size: 32rpx;
-      margin-top: 10rpx;
-      font-weight: 400;
+      line-height: px2rem(16);
+      font-size:  px2rem(16);
+      margin-top: px2rem(5);
+      font-weight: 400;      
+      color: #2c3e50;
     }
 </style>
 <script>
