@@ -1,6 +1,7 @@
 <!--  -->
 <template>
   <div class="index">
+    <mt-header fixed title="凡有e租"></mt-header>
     <swiper :options="swiperOption" class="homeSwiper">
       <swiper-slide class="homeSwiperSlide" v-for="(item, i) in YXBanners" :key="i">
         <img class="img" :src="item.url" background-size="cover" />
@@ -104,11 +105,24 @@ export default {
   }
 };
 </script>
+<style lang='scss'>
+.mint-header.is-fixed{
+  z-index: 1000 ;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  .mint-header-title{
+    font-size: 18px;
+    color: #2c3e50;
+  }  
+}
+</style>
+
 <style lang='scss' scoped>
 @import '../assets/styles/global';
 .index{
   .homeSwiper{
-    margin: 0 20px;
+    margin: 40px 20px 0 20px;
     border-radius: 6px;
     .homeSwiperSlide{
       height: 200px;

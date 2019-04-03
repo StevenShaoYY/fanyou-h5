@@ -10,6 +10,14 @@ Vue.use(MintUI);
 Vue.prototype.$axios = axios;
 
 Vue.config.productionTip = false;
+// 判断该路由是否需要登录权限
+// router.beforeEach((to) => {
+//   window.scrollTo(0, 0)
+//   /* 路由发生变化修改页面title */
+//   if (to.meta.title) {
+//     document.title = to.meta.title
+//   }
+// })
 
 new Vue({
   router,
