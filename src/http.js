@@ -33,8 +33,8 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
   // 结束加载动画
   // endLoading();
-  console.log('response');
-  console.log('response: ', response);
+  // console.log('response');
+  // console.log('response: ', response);
   return response;
 }, error => {
   // 错误提醒

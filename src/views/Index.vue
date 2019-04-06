@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     getYXBanners() {
-      this.$axios.post('/mall/home/ad',
+      this.$axios.post('/mall/api/home/ad',
         {},
         axiosHeaders
       ).then(res => {
@@ -76,7 +76,7 @@ export default {
       })
     },
     getCategoryList() {
-      this.$axios.post('/mall/mallCategory/list',
+      this.$axios.post('/mall/api/mallCategory/list',
         this.pageData,
         axiosHeaders
       ).then(res => {
@@ -88,7 +88,7 @@ export default {
       })
     },
     getTopic() {
-      this.$axios.post('/mall/home/topic',
+      this.$axios.post('/mall/api/home/topic',
         {},
         axiosHeaders
       ).then(res => {
@@ -105,18 +105,6 @@ export default {
   }
 };
 </script>
-<style lang='scss'>
-.mint-header.is-fixed{
-  z-index: 1000 ;
-  display: flex;
-  background: #fff;
-  align-items: center;
-  .mint-header-title{
-    font-size: 18px;
-    color: #2c3e50;
-  }  
-}
-</style>
 
 <style lang='scss' scoped>
 @import '../assets/styles/global';

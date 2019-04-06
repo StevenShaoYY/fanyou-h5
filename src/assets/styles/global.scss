@@ -30,6 +30,21 @@ $fontSize: 37.5;
   align-items: center;
 }
 
+a{
+  text-decoration: none;
+}
+
+.mint-header.is-fixed{
+  z-index: 1000 ;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  .mint-header-title{
+    font-size: 18px;
+    color: #2c3e50;
+  }  
+}
+
 .iconfont{
   color: #333;
   font-size: px2rem(20);

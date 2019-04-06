@@ -35,6 +35,105 @@ export default new Router({
       path: "/login",
       name: "login",
       component: () => import("./views/Login.vue")
+    },
+    {
+      path: "/myCenter",
+      name: "myCenter",
+      component: () => import("./views/myCenter.vue"),
+      meta: {
+        title: '个人中心',        
+        showBottomTabBar: true
+      }
+    },
+    {
+      path: "/pages/category/index",
+      name: "category",
+      component: () => import("./views/category.vue"),
+      meta: {
+        title: '产品种类',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/pages/goodsDetail/index",
+      name: "goodsDetail",
+      component: () => import("./views/goodsDetail.vue"),
+      meta: {
+        title: '产品详情',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/help",
+      name: "help",
+      component: () => import("./views/help.vue"),
+      meta: {
+        title: '帮助中心',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/addressManage",
+      name: "addressManage",
+      component: () => import("./views/addressManage.vue"),
+      meta: {
+        title: '帮助中心',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/returnDevice",
+      name: "returnDevice",
+      component: () => import("./views/returnDevice.vue"),
+      meta: {
+        title: '设备归还',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/identityAuth",
+      name: "identityAuth",
+      component: () => import("./views/identityAuth.vue"),
+      meta: {
+        title: '身份认证',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/orderProduct",
+      name: "orderProduct",
+      component: () => import("./views/orderProduct.vue"),
+      meta: {
+        title: '订单',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/aboutUs",
+      name: "aboutUs",
+      component: () => import("./views/aboutUs.vue"),
+      meta: {
+        title: '关于我们',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/aboutUs",
+      name: "aboutUs",
+      component: () => import("./views/aboutUs.vue"),
+      meta: {
+        title: '关于我们',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/FAQ",
+      name: "FAQ",
+      component: () => import("./views/FAQ.vue"),
+      meta: {
+        title: '常见问题',        
+        showBottomTabBar: false
+      }
     }
   ]
 });

@@ -46,20 +46,20 @@ module.exports = {
     },
     devServer: {
         open: true,
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 8088,
         https: false,
         hotOnly: false,
         proxy: { // 配置跨域
             '/mall': {
-                target: 'https://test.fanyoutech.com:7002',                
+                target: 'https://test.fanyoutech.com:7002',           // https://prod1.fanyoutech.com:7003     
                 changOrigin: true,
                 pathRewrite: {
-                  '^/mall': '/mall/api'
+                  '^/mall': '/mall'
                 }
             },
             '/user': {
-                target: 'https://test.fanyoutech.com:7002',                
+                target: 'https://test.fanyoutech.com:7002',           // https://test.fanyoutech.com:7002     
                 changOrigin: true,
                 pathRewrite: {
                   '^/user': '/user/userBase'

@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <navigator class="product-item" :url="productItem.goodsDetailUrl">
+  <div class="product2">
+    <a class="product-item" :href="productItem.goodsDetailUrl">
       <img class="img" :src="productItem.picUrl" background-size="cover" />
       <div class="item-container">
         <div class="title">{{productItem.name}}</div>
@@ -9,52 +9,55 @@
         </div>
         <div class="price">¥{{productItem.rentPrice.toFixed(2)}}<span class="span">/{{productItem.periodUnit}}</span></div>
       </div>
-    </navigator>
+    </a>
   </div>
 </template>
+
 <style scoped>
-    .wrapper{
+    .product2{
         background-color: #ffffff;
         border-radius: 15rpx; 
         border: 1px solid #FAFAFA;
         box-shadow: 2rpx 2rpx 50rpx #cccccc;
-        width: 692rpx;
-        height: 220rpx;
-        margin-bottom: 20rpx;     
+        width: 346px;
+        height: 110px;
+        margin-bottom: 10px;     
     }
     .product-item {
       display: flex;
     }
     .product-item .img {
-      width: 170rpx;
-      height: 170rpx;
-      margin-top: 25rpx;
-      margin-left: 25rpx;
+      width: 85px;
+      height: 85px;
+      margin-top: 12px;
+      margin-left: 12px;
     }
     .item-container {
       /* flex:617rpx; */
-      width: 417rpx;
-      margin-left: 25rpx;
-      margin-top: 30rpx;
+      width: 209px;
+      margin-left: 12px;
+      margin-top: 15px;
     }
     .item-container .title {
-      font-size: 36rpx;
+      font-size: 18px;
       font-weight: 400;
       white-space:nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      line-height: 40rpx;
+      line-height: 20px;
+      color: #020202;
+      text-align: left;
     }
     .tab-container {
       display: flex;
       flex-direction: row;
     }
     .sub-item {
-      margin: 20rpx 10rpx 15rpx 0;
-      height: 40rpx;
-      padding: 0 15rpx;
-      line-height: 40rpx;
-      font-size: 25rpx;
+      margin: 10px 5px 7px 0;
+      height: 20px;
+      padding: 0 7px;
+      line-height: 20px;
+      font-size: 12px;
       color: #ffffff;
       display: block;
     }
@@ -71,14 +74,16 @@
       background-color: #000000
     }
     .item-container .price {
-      font-size: 36rpx;
+      font-size: 18px;
       font-weight: 700;
-      line-height: 40rpx;
+      line-height: 20px;
+      color: #020202;
+      text-align: left;
     }
     .item-container .price .span{
-      font-size: 32rpx;
+      font-size: 16px;
       font-weight: 100;
-      line-height: 40rpx;
+      line-height: 20px;
     }
 </style>
 <script>

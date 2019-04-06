@@ -21,7 +21,7 @@ export default {
         // {normal: require('../assets/images/icon_intro.png'), selected: require('../assets/images/icon_intro_selected.png'), name: '推荐', url: '/intro'},
         // {normal: require('../assets/images/icon_search.png'), selected: require('../assets/images/icon_search_selected.png'), name: '搜索', url: '/search'},
         // {normal: require('../assets/images/icon_chat.png'), selected: require('../assets/images/icon_chat_selected.png'), name: '聊天', url: '/chat'},
-        {normal: require('../assets/images/tab_mine_normal.png'), selected: require('../assets/images/tab_mine_current.png'), name: '我的', url: '/mine'}
+        {normal: require('../assets/images/tab_mine_normal.png'), selected: require('../assets/images/tab_mine_current.png'), name: '我的', url: '/myCenter'}
       ]
     };
   },
@@ -34,7 +34,13 @@ export default {
 
   mounted () {},
 
-  methods: {}
+  methods: {    
+    switchTo(url) {
+      console.log('url: ', url)
+      console.log('router: ', this.$router);
+      this.$router.replace(url)
+    }
+  }
 }
 
 </script>
@@ -61,7 +67,7 @@ export default {
         margin-bottom: 2px;
       }
       .on{
-        color: red;
+        color: #2c3e50;;
       }
     }
   }
