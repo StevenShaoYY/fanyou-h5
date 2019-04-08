@@ -24,51 +24,55 @@
 </template>
 <style scoped>
     .wrapper{
-      width: 692rpx;
-      margin-left:29rpx;
-      border-radius: 15rpx; 
+      width: 90%;
+      margin-left:auto;
+      margin-right:auto;
+      border-radius: 7px; 
       background-color: #ffffff;
       border: 1px solid #FAFAFA;
-      box-shadow: 2rpx 2rpx 50rpx #cccccc;
-      margin-top: 20rpx;
-      margin-bottom: 20rpx;
+      box-shadow: 1px 1px 25px #cccccc;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
     .section1{
       background-color: #EF7000;
-      height: 60rpx;
+      height: 30px;
       color: #ffffff;
-      line-height: 60rpx;
-      border-radius: 15rpx 15rpx 0 0; 
-      padding-left: 30rpx;
-      font-size: 28rpx;
+      line-height: 30px;
+      border-radius: 7px 7px 0 0; 
+      padding-left: 15px;
+      font-size: 14px;
     }
     .section2 {
       background-color: #fafafa;
       color: #969696;
-      font-size: 26rpx;
-      margin-left: 33rpx;
-      width: 566rpx;
-      padding: 30rpx;
+      font-size: 13px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 90%;
+      padding: 15px;
+      text-align: left;
+      box-sizing: border-box;
     }
     .section2 .text-time {
-      margin-top: 30rpx;
+      margin-top: 15px;
       text-align: right;
     }
     .bottom-container{
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      height: 86rpx;
-      margin-right: 33rpx;
+      height: 43px;
+      margin-right: 16px;
     }
     .bottom-container .btn {
-      height: 44rpx;
-      line-height: 44rpx;
-      font-size: 26rpx;
-      margin-left: 25rpx;
-      padding: 0 15rpx;
-      border-radius: 8rpx;
-      margin-top: 21rpx;
+      height: 22px;
+      line-height: 22px;
+      font-size: 13px;
+      margin-left: 12px;
+      padding: 0 7px;
+      border-radius: 4px;
+      margin-top: 10px;
     }
     .bottom-container .sty2 {
       color:#cbcbcb;

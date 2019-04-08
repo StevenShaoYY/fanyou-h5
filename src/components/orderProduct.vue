@@ -17,57 +17,58 @@
 <style scoped>
     .wrapper{
         background-color: #ffffff;
-        width: 692rpx;
-        height: 220rpx;
-        margin-bottom: 20rpx;     
+        width: 346rpx;
+        height: 110px;
+        margin-bottom: 10px;     
     }
     .product-item {
       display: flex;
     }
     .product-item .img {
-      width: 170rpx;
-      height: 170rpx;
-      margin-top: 25rpx;
-      margin-left: 25rpx;
+      /* width: 100%; */
+      height: 85px;
+      margin-top: 12px;
+      margin-left: 12px;
     }
     .item-container {
       width: 554rpx;
-      margin-left: 25rpx;
-      margin-top: 30rpx;
+      text-align: left;
+      margin-left: 12px;
+      margin-top: 15px;
     }
     .item-container .title {
-      padding-right: 20rpx;
-      font-size: 30rpx;
+      padding-right: 10px;
+      font-size: 15px;
       font-weight: 400;
       white-space:nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      line-height: 40rpx;
+      line-height: 20px;
     }
     .tab-container {
       display: flex;
       flex-direction: row;
     }
     .sub-item {
-      margin: 20rpx 10rpx 15rpx 0;
-      max-width: 100rpx;
+      margin: 10px 5px 7px 0;
+      max-width: 50px;
       white-space:nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      height: 36rpx;
+      height: 18px;
       border: 1px solid #c4c4c4;
-      border-radius: 18rpx;
-      padding: 0 10rpx;
-      line-height: 36rpx;
-      font-size: 24rpx;
+      border-radius: 9px;
+      padding: 0 5px;
+      line-height: 18px;
+      font-size: 12px;
       color: #c4c4c4;
       display: block;
     }
     .item-container .price {
-      font-size: 26rpx;
+      font-size: 13px;
       font-weight: 400;
       font-weight: 700;
-      line-height: 40rpx;
+      line-height: 20px;
       color: #969696;
     }
     .item-container .price .span{
