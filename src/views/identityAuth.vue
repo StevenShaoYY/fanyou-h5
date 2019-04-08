@@ -1,6 +1,12 @@
 <!-- D:\jz\src\pages\realName -->
 <template>
-  <div>身份认证</div>
+  <div>身份认证1
+    <mt-radio
+  title="radio list"
+  v-model="value"
+  :options="['optionA', 'optionB', 'optionC']">
+</mt-radio>
+  </div>
 </template>
 
 <script>

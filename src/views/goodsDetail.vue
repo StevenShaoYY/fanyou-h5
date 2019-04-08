@@ -11,7 +11,7 @@
           <div class="goods-title">{{goodsDetail.name}}</div>
           <div class="goods-price-container">
               <div class="rent-price">¥<span class="big-price">{{goodsDetail.rentPrice}}</span><span class="normal-font">/{{goodsDetail.periodUnit}}</span></div>
-              <div class="total-price">商品价值：¥{{goodsDetail.retailPrice}}</div>
+              <div class="total-price">1商品价值：¥{{goodsDetail.retailPrice}}</div>
           </div>
       </section>
       <ul class="tab-list">
@@ -19,17 +19,17 @@
           {{item}}
           </li>
       </ul>
-      <swiper class="swiper-container" :current="activeItem" duration="300" @change="switchTabBySwiper" :style="{height:winHeight+'rpx'}" skip-hidden-item-layout="true">
-        <swiperSlide>
+      
+        <div v-if="activeItem == 0">
             <div @scroll="scrollEvent($event)" :scroll-y="canScroll" :style="{height:winHeight+'rpx'}">
                 <div class="img-container">
                     <img mode="widthFix" v-for="(item, index) of goodsDetail.description" :key="index" :data-index="index" class="desc-image" :src="item" background-size="cover"/>
                 </div>
             </div>
-        </swiperSlide>
-        <swiperSlide>
+        </div>
+        <div v-else-if="activeItem == 1">
             <div @scroll="scrollEvent($event)" :scroll-y="canScroll" :style="{height:winHeight+'rpx'}">
-                <section>
+                <section class="zuling-box">
                     <div class="zuling-header">租赁流程</div>
                     <div class="zuling-content">选择商品 -- 下单审核 -- 首期支付 -- 发货 -- 月付租金 -- 归还商品</div>
                     <div class="zuling-header">租期结束后可选方案</div>
@@ -38,7 +38,7 @@
                     <div class="zuling-subheader">买断</div>
                     <div class="zuling-content">支持尾款终身拥有</div>
                 </section>
-                <section>
+                <section class="zuling-box">
                     <div class="zuling-header">其他说明</div>
                     <div class="zuling-subheader">收货须知</div>
                     <div class="zuling-content">身份证正反面复印件以确认本人收货，并交由快递小哥寄回本平台制定地点存档</div>
@@ -48,8 +48,8 @@
                     <div class="zuling-content">租赁到期后可支付买断款买断该商品，买断款以下单时协议里的买断价为准。</div>
                 </section>
             </div>
-        </swiperSlide>
-        <swiperSlide>
+        </div>
+        <div v-else-if="activeItem == 2">
             <div @scroll="scrollEvent($event)" :scroll-y="canScroll" :style="{height:winHeight+'rpx'}">
                 <div class="comment-container has-comment" v-if="commentList.length>0">
                     <comment-card v-for="(item, index) of commentList" :key="index" :commentItem="item"></comment-card>
@@ -58,8 +58,8 @@
                     <div class="no-comment">暂无评论</div>
                 </div>
             </div>
-        </swiperSlide>
-      </swiper>
+        </div>
+      
     </div>
   </div>
 </template>
@@ -208,7 +208,12 @@ export default {
     switchTabBySwiper (e) {
         this.activeItem = e.detail.current
     },
+    switchTabBySwiper (e) {
+        console.log('e: ', e)
+        this.activeItem = e.detail.current
+    },
     switchTab(index){
+        console.log('index: ', index);
         this.activeItem = index
     }
   }
@@ -216,6 +221,9 @@ export default {
 
 </script>
 <style lang='scss' scoped>
+    .zuling-box{
+        text-align: left;
+    }
     .container {
         background-color: #ffffff;
         font-family:microsoft yahei;
@@ -243,13 +251,14 @@ export default {
       color:#1b1b1b;
     }
     .swiper-container{
-        margin-bottom: 70px;
+        margin-bottom: 20px;
     }
     .header {
         width: 90%;
         background-color: #ffffff;
         // height: 700rpx;
         margin: 10px auto;
+        padding-bottom: 30px;
         border: 1px solid #FAFAFA;
         border-radius: 10px;
         box-shadow: 1px 1px 25px #cccccc;
@@ -310,7 +319,7 @@ export default {
     //     // line-height: 45rpx;
     // }
     .zuling-header {
-        font-size: 28rpx;
+        font-size: 14px;
         font-weight: 700;
         margin-left: 14px;
         margin-top: 20px;
@@ -368,7 +377,7 @@ export default {
     }
     .img-container {
         margin-top: 10px;
-        width: 375px;
+        width: 100%;
         font-size: 0;
     }
     .desc-image {
@@ -378,9 +387,10 @@ export default {
         // height: 900rpx;
     }
     .comment-container {
-        width: 346px;
+        width: 90%;
         min-height: 82vh;
-        margin-left: 14px;
+        margin-left: auto;
+        margin-right: auto;
         border: 1px solid #FAFAFA;
         border-radius: 10px;
         margin-top: 10px;
