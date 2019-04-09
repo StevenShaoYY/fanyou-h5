@@ -7,7 +7,7 @@
         </li>
     </ul>
     <swiper :options="swiperOption" class="homeSwiper">
-      <swiper-slide class="orderSwiperSlide" v-for="(item, i) in detailList" :key="i">
+      <swiper-slide class="orderSwiperSlide" v-for="(item, i) in detailList" :key="i" >
         <div class="comment-container has-comment" v-if="item.data.length>0">
             <order-card v-for="(item1, index1) of item.data" :key="index1" :data="item1" @fresh="refreshPage"></order-card>
         </div>
@@ -41,7 +41,13 @@ export default {
           autoplay: false,
           loop: false,
           pagination: {
-            el: ".swiper-pagination"
+            el: ".swiper-pagination",
+            clickable :true
+          },
+          on:{
+            slideChangeTransitionEnd: () => {
+              console.log('this.realIndex: ', this.realIndex)
+            },
           }
         },
         activeItem: 0,

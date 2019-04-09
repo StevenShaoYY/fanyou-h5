@@ -77,7 +77,7 @@ export default new Router({
       name: "addressManage",
       component: () => import("./views/addressManage.vue"),
       meta: {
-        title: '帮助中心',        
+        title: '地址管理',        
         showBottomTabBar: false
       }
     },
