@@ -1,12 +1,6 @@
-<!-- D:\jz\src\pages\realName -->
+<!-- D:\jz\src\pages\mycomment -->
 <template>
-  <div>身份认证
-    <mt-radio
-  title="radio list"
-  v-model="value"
-  :options="['optionA', 'optionB', 'optionC']">
-</mt-radio>
-  </div>
+  <div>我的评论</div>
 </template>
 
 <script>

@@ -48,11 +48,11 @@ axios.interceptors.response.use(response => {
   console.log('status: ', status)
   if (!data.ok) {
     // Message.error(status.data.msg);
-    alert(data.msg)
+    alert('数据异常: ' + data.msg)
     // 清除token
-    localStorage.removeItem('ACCESS_TOKEN');
+    // localStorage.removeItem('ACCESS_TOKEN');
     // 跳转到登录页面
-    router.push("/login")
+    // router.push("/login")
   }
 
   return Promise.reject(error)

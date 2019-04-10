@@ -134,6 +134,25 @@ export default new Router({
         title: '常见问题',        
         showBottomTabBar: false
       }
+    },
+    {
+      path: "/myCollect",
+      name: "myCollect",
+      component: () => import("./views/myCollect.vue"),
+      meta: {
+        title: '我的收藏',        
+        showBottomTabBar: false
+      }
+    },
+    {
+      path: "/myComment",
+      name: "myComment",
+      component: () => import("./views/myComment.vue"),
+      meta: {
+        title: '我的评论',        
+        showBottomTabBar: false
+      }
     }
+
   ]
 });

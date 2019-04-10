@@ -59,21 +59,86 @@
                 </div>
             </div>
         </div>
-      
+
+        <div class="bottom-btn">
+            <div class="l-collect" @click="collect()">
+                <img v-if="goodsDetail.isCollect" class="icon" src="../assets/images/icon_collect_current.png"/>
+                <img v-else class="icon" src="../assets/images/icon_collect_normal.png"/>
+            </div>
+            <div class="l-collect l-collect2" >
+                <img @click="call" class="icon" src="../assets/images/btn_call_contact.png"/>
+            </div>
+            <div @click="showDialog($event)" class="select-guige">立即租赁</div>
+        </div>      
     </div>
+    <login-dialog v-if="showLogin" @close="showLogin=false"></login-dialog>
+    <!--  catchtouchmove="true" -->
+       <div class="attr-pop-box" :hidden="openAttr">
+            <div class="attr-pop">
+                <div class="img-info">
+                    <div class="close" @click="closeAttr">
+                        <img class="icon" src="../assets/images/btn_close_popup.png"/>
+                    </div>
+                    <img class="img" :src="goodsDetail.picUrl"/>
+                    <div class="info">
+                        {{goodsDetail.name}}
+                    </div>
+                </div>
+                <div class="price-container">
+                    <div class="p">¥{{selectGoods.rentPrice}}</div>
+                    <div class="a">商品价值:¥{{selectGoods.goodsPrice}}</div>
+                </div>
+                <div class="center-container">
+                    <div class="spec-con">
+                        <div class="spec-item" v-for="(item, index) of goodsDetail.specificationList" :key="index" :data-index="index">
+                            <div class="name">{{item.name}}</div>
+                            <div class="values">
+                                <!-- <div :class="iitem.checked ? iitem.checked=='noexist'?'value unexist-value':'selected value' : 'value'"  @click="selectproduct" v-for="(iitem, iindex) of item.specificationLists" :key="iindex" :data-index="iindex" :data-name-id="iitem.name" :data-sername-id="iitem.serName">{{iitem.name}}</div> -->
+                                <div class="value" :class="{'unexist-value':iitem.checked=='noexist','selected':iitem.checked==true}"  @click="selectproduct" v-for="(iitem, iindex) of item.specificationLists" :key="iindex" :data-index="iindex" :data-name-id="iitem.name" :data-sername-id="iitem.serName">{{iitem.name}}</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="name">{{goodsDetail.financeSpecificationList[0].name}}</div>
+                            <div class="values">
+                                <div :class="item2.checked ? 'selected value' : 'value'"  @click="selectRentTime" v-for="(item2, index2) of goodsDetail.financeSpecificationList[0].goodsFinanceSpecificationLists" :key="index2" :data-index="index2" :data-name-id="item2.name">{{item2.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="goodsDetail.finaceList.length>0" class="yiwao-container">
+                        <div>意外保障<span class="sub">什么是意外保障？</span>
+                            <a class="fa-qa" href="/pages/finaceques/index" >
+                                <img class="img" src="../assets/images/question.png" background-size="cover" />
+                            </a>
+                        </div>
+                        <div class="yiwai-select">
+                            <div @click="finaceSelect(0)" :class="goodsDetail.finaceList[0].checked ? 'selected value first' : 'value first'">一次性支付&nbsp&nbsp|&nbsp&nbsp¥{{goodsDetail.finaceList[0].amount}}</div>
+                            <div class="unexist-value value" v-if="goodsDetail.finaceList.length>1&&fenqiSelectFlag==false">分期信息选择规格后显示</div>
+                            <div @click="finaceSelect(1)" :class="goodsDetail.finaceList[1].checked ? 'selected value' : 'value'" v-if="goodsDetail.finaceList.length>1&&fenqiSelectFlag==true">分{{finace}}期&nbsp&nbsp|&nbsp&nbsp每期¥{{goodsDetail.finaceList[1].amount}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-btn-container">
+                    <div @click="placeOrder" class="startOrder">
+                        确认
+                    </div>
+                </div>
+            </div>
+        </div>
   </div>
 </template>
 
 <script>
-import {axiosHeaders} from "@/assets/api"
- 
+import {axiosHeaders} from "@/assets/api" 
+import { Toast } from 'mint-ui';
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import LoginDialog from '../components/loginDialog.vue';
 export default {
   name: '',
 
   components: {
     swiper,
     swiperSlide,
+    LoginDialog
   },
 
   data () {
@@ -99,8 +164,7 @@ export default {
         hasScrollB:false,
         hasScrollT:false,
         canScroll: true,
-        divStyle: '',
-        coloctIcon: "/static/images/icon_collect_normal.png"
+        divStyle: ''
     }
   },
 
@@ -121,6 +185,12 @@ export default {
   mounted () {},
 
   methods: {
+    toast(str) {
+        let instance = Toast(str);
+        setTimeout(() => {
+          instance.close();
+        }, 2000);
+    },
     getDetail() {      
       let dto = {
           "id": this.$route.query.id
@@ -185,6 +255,47 @@ export default {
         }
         return ps;
     },
+
+    // 规格选择
+    selectproduct(e) {
+        //1.点击改变样式
+        //2.检查是否有货
+        let checkedValues = [];
+        let _specificationList = this.goodsDetail.specificationList;
+        let specNameId = e.currentTarget.dataset.index;
+        let specSernameId = e.currentTarget.dataset.sernameId;
+        if (_specificationList[specSernameId].specificationLists[specNameId].checked === 'noexist') {
+            return
+        }
+        if (_specificationList[specSernameId].specificationLists[specNameId].checked === true) {
+            _specificationList[specSernameId].specificationLists[specNameId].checked = false
+        } else {
+            for (let i of _specificationList[specSernameId].specificationLists) {
+                if (i.checked !== 'noexist')
+                    i.checked = false
+            }
+            _specificationList[specSernameId].specificationLists[specNameId].checked = true
+        }
+        this.goodsDetail.specificationList = _specificationList;
+        this.changeSpecInfo()
+        this.changeAll()
+    },
+    getSelectProduct(id) {
+        for (let i of this.goodsDetail.productList) {
+            if(i.id == id) {
+                return i
+            }
+        }
+    },
+    powerset(arr) {
+        var ps = [[]];
+        for (var i=0; i < arr.length; i++) {
+            for (var j = 0, len = ps.length; j < len; j++) {
+                ps.push(ps[j].concat(arr[i]));
+            }
+        }
+        return ps;
+    },
     buildResult() {
       // this.allResultArr
       let res = []
@@ -205,6 +316,113 @@ export default {
       }
       this.allResultArr = res
     },
+    getSelectItem () {
+        if(this.goodsDetail.specificationList == null) {
+            return false
+        }
+        let _specificationListTemp = this.goodsDetail.specificationList;
+        let selectItem = []
+        for (let i of _specificationListTemp) {
+            let hasAdd = false
+            for (let j of i.specificationLists) {
+                if(j.checked === true) {
+                    selectItem.push(j.name)
+                    hasAdd = true
+                }
+            }
+            if (!hasAdd) {
+                selectItem.push('')
+            }
+        }
+        return selectItem
+    },
+    trimSpliter(arr) {
+        let ret = ''
+        for (let k of arr){
+            if(k !== '') {
+                ret = ret + '+' + k
+            }
+        }
+        if (ret[0] === '+') {
+            ret = ret.substr(1)
+        }
+        return ret
+    },
+    changeSpecInfo () {
+        let select = this.getSelectItem ()
+        let _specificationListTemp = this.goodsDetail.specificationList;
+        for (let i in _specificationListTemp) {
+            let copy = this.getSelectItem ()
+            let data1 = _specificationListTemp[i]
+            for (let j in data1.specificationLists) {
+                let item = data1.specificationLists[j].name
+                if(select[i] === item) {
+                    continue
+                }
+                copy[i] = item
+                let curr = this.trimSpliter(copy)
+                if(this.allResultArr[curr]) {
+                    data1.specificationLists[j].checked = false
+                } else {
+                    data1.specificationLists[j].checked = 'noexist'
+                }
+            }  
+        }
+    },
+    
+    // 判断规格是否选择完整(每一种至少选择一项)，加入购物车前进行判断
+    isCheckedAllSpec () {
+        let selectItem = this.getSelectItem()
+        if(selectItem === false) {
+            return false
+        }
+        for (let j of selectItem) {
+            if (j === '') {
+                return false
+            }
+        }
+        let curr = selectItem.join('+')
+        return this.allResultArr[curr].skus[0]
+    },
+    selectRentTime(e) {
+        //1.点击改变样式
+        //2.改变价格
+        //3.改变保障价格
+        let rentId = e.currentTarget.dataset.index;
+        let rentList = this.goodsDetail.financeSpecificationList[0].goodsFinanceSpecificationLists
+        if(!rentList[rentId].checked) {
+            for(let j of rentList) {
+                j.checked = false
+            }
+            rentList[rentId].checked = true
+            this.hasRentSelected = rentId
+        }
+        this.changeAll()
+    },
+    changeAll() {
+        if (this.hasRentSelected!==false && this.isCheckedAllSpec()) {
+            let sp = this.getSelectProduct(this.isCheckedAllSpec())
+            this.selectGoods.rentPrice = sp.financeRespDTOList[this.hasRentSelected].price.toFixed(2)
+            this.fenqiSelectFlag = true
+            this.selectGoods.goodsPrice = sp.price.toFixed(2)
+            if(this.goodsDetail.finaceList[1])
+                this.finace = this.goodsDetail.finaceList[1].dataList[this.hasRentSelected]
+        } else if (this.isCheckedAllSpec()) {
+            let sp = this.getSelectProduct(this.isCheckedAllSpec())
+            this.selectGoods.goodsPrice = sp.price.toFixed(2)
+        }
+    },
+    finaceSelect(id) {
+        let list = this.goodsDetail.finaceList
+        if(list[id].checked === true) {
+            list[id].checked = false
+        } else {
+            for (let i of list) {
+                i.checked = false
+            }
+            list[id].checked = true
+        }
+    },
     switchTabBySwiper (e) {
         this.activeItem = e.detail.current
     },
@@ -215,8 +433,183 @@ export default {
     switchTab(index){
         console.log('index: ', index);
         this.activeItem = index
+    },
+    placeOrder() {
+        if(!this.goodsDetail.finaceList) {
+            return
+        }
+        let finaceList = this.goodsDetail.finaceList
+        let finaceSelected = false
+        let proGuige = this.isCheckedAllSpec()
+        for (let i in finaceList) {
+            if (finaceList[i].checked) {
+                finaceSelected = i
+            }
+        }
+        
+        if (proGuige === false) {
+            this.toast('请选择规格')
+            return
+        }
+        if(this.fenqiSelectFlag === false) {
+            this.toast('请选择租期')
+            return
+        }
+        if(finaceSelected === false) {
+            this.toast('请选择意外保障')
+            return
+        }
+        if(!this.checkLogin()){
+            this.showLogin=true
+            return
+        }
+        this.$axios.post('/user/getSimpleInfo',
+          '',
+          axiosHeaders
+        ).then(res => {
+          console.log('res: ', res);          
+        })
+        // this.POST('userBase/getSimpleInfo', '', res => {
+        //     let result = res.data.result;
+        //     if(result.isIdCardFront===true) {
+        //     // if(true){
+        //         if(this.$mp.platform === 'alipay') {
+        //             my.navigateTo({
+        //                 url: `/pages/placeOrder/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //             })
+        //         } else {
+        //             wx.navigateTo({
+        //                 url: `/pages/placeOrder/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //             })
+        //         }
+        //         // this.POST('userBase/checkBankBind', '', res => {
+        //         //     if(!res.data.result) {
+        //         //         if(this.$mp.platform === 'alipay') {
+        //         //             my.navigateTo({
+        //         //                 url: `/pages/bindcard/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //         //             })
+        //         //         } else {
+        //         //             wx.navigateTo({
+        //         //             url: `/pages/bindcard/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //         //             })
+        //         //         }                                    
+        //         //     } else {
+        //         //         if(this.$mp.platform === 'alipay') {
+        //         //             my.navigateTo({
+        //         //                 url: `/pages/placeOrder/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //         //             })
+        //         //         } else {
+        //         //             wx.navigateTo({
+        //         //                 url: `/pages/placeOrder/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //         //             })
+        //         //         }
+        //         //     }
+        //         // },'user')
+        //     } else {
+        //         if(this.$mp.platform === 'alipay') {
+        //             my.navigateTo({
+        //                 url: `/pages/realName/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //             })
+        //         } else {
+        //             wx.navigateTo({
+        //                 url: `/pages/realName/index?id=${this.$mp.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+        //             })
+        //         }
+        //     }
+        // },'user');
+    },
+    checkLogin() {
+        return true
+    },
+    call() {
+        window.location.href = 'tel://0571-86507022'
+    },
+    collect() {
+        if(!this.checkLogin()){
+            this.showLogin=true
+            return
+        }
+        let dto = {
+            "type": 0,
+            "valueId": this.$route.query.id
+        }
+        console.log('this.goodsDetail.isCollect: ', this.goodsDetail.isCollect)
+        if(this.goodsDetail.isCollect) {
+            this.$axios.post('/mall/api/mallCollect/delete',
+                dto,
+                axiosHeaders
+            ).then(res => {
+                let instance = Toast('取消收藏成功');
+                setTimeout(() => {
+                    instance.close();
+                }, 2000);
+                this.coloctIcon = "../assets/images/icon_collect_normal.png"
+                this.goodsDetail.isCollect = false
+            })
+        } else {
+            this.$axios.post('/mall/api/mallCollect/add',
+                dto,
+                axiosHeaders
+            ).then(res => {
+                let instance = Toast('收藏成功');
+                setTimeout(() => {
+                    instance.close();
+                }, 2000);
+                this.goodsDetail.isCollect = true
+                this.coloctIcon = "../assets/images/icon_collect_current.png"
+            })
+        }
+    },    
+    showDialog(e) {
+        this.openAttr = false;
+        this.canScroll = false;
+        this.divStyle = 'top:0rpx;left:0px;width:100%;height:100%;overflow:hidden;position:fixed;'
+    },
+    closeAttr () {
+        this.canScroll = true
+        this.openAttr = true;
+        this.divStyle = ''
+    },
+    // 规格选择
+    selectproduct(e) {
+        //1.点击改变样式
+        //2.检查是否有货
+        let checkedValues = [];
+        let _specificationList = this.goodsDetail.specificationList;
+        let specNameId = e.currentTarget.dataset.index;
+        let specSernameId = e.currentTarget.dataset.sernameId;
+        if (_specificationList[specSernameId].specificationLists[specNameId].checked === 'noexist') {
+            return
+        }
+        if (_specificationList[specSernameId].specificationLists[specNameId].checked === true) {
+            _specificationList[specSernameId].specificationLists[specNameId].checked = false
+        } else {
+            for (let i of _specificationList[specSernameId].specificationLists) {
+                if (i.checked !== 'noexist')
+                    i.checked = false
+            }
+            _specificationList[specSernameId].specificationLists[specNameId].checked = true
+        }
+        this.goodsDetail.specificationList = _specificationList;
+        this.changeSpecInfo()
+        this.changeAll()
+    },
+    selectRentTime(e) {
+        //1.点击改变样式
+        //2.改变价格
+        //3.改变保障价格
+        let rentId = e.currentTarget.dataset.index;
+        let rentList = this.goodsDetail.financeSpecificationList[0].goodsFinanceSpecificationLists
+        if(!rentList[rentId].checked) {
+            for(let j of rentList) {
+                j.checked = false
+            }
+            rentList[rentId].checked = true
+            this.hasRentSelected = rentId
+        }
+        this.changeAll()
     }
-  }
+}
 }
 
 </script>
@@ -412,7 +805,9 @@ export default {
         bottom: 0;
     }
     .attr-pop {
-        width: 375px;
+        width: 374px;
+        left: 50%;
+        margin-left: -187px;
         border-radius: 25px 25px 0 0;
         height: auto;
         max-height: 980rpx;
@@ -425,7 +820,7 @@ export default {
     }
     .img-info {
         position: fixed;
-        width: 100%;
+        width: 374px;
         height: 150px;
         background-color: #FFF6EF;
         display: flex;
@@ -439,6 +834,9 @@ export default {
         z-index: 888;
     }
     .img-info .info {
+        flex: 1;
+        text-align: left;
+        line-height: 20px;
         color: #FF6F00;
         margin-top: 80px;
         margin-left: 10px;
@@ -451,8 +849,7 @@ export default {
         width: 24px;
         height: 24px;
         right: 40px;
-        overflow: hidden;
-        top: 31.12px;
+        top: 10px;
     }
 
     .attr-pop .close .icon {
@@ -527,6 +924,9 @@ export default {
         border-top: 1px solid #e7e7e7;
         padding-top: 15px;
         font-size: 13px;
+        div{
+            text-align: left;
+        }
     }
     .fa-qa {
         width: 16px;
