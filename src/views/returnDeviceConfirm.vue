@@ -51,13 +51,25 @@
 </template>
 
 <script>
+import mixins from '../mixins'
 export default {
-  name: '',
+  name: 'returnDeviceConfirm',
+  mixins: [mixins], 
 
   components: {},
 
   data () {
     return {
+        orderId: '',
+        postCode:'',
+        address:'',
+        mobile:'',
+        receiveName:'',
+        returnData: {
+            shipChannel: '',
+            shipSn: ''
+        },
+        canchange: true
     }
   },
 
@@ -65,11 +77,63 @@ export default {
 
   watch: {},
 
-  created () {},
+  created () {
+    this.orderId = this.$route.query.orderId
+    this.postCode = this.$route.query.postCode
+    this.address = this.$route.query.address
+    this.mobile = this.$route.query.mobile
+    this.receiveName = this.$route.query.receiveName
+    if(this.$route.query.shipChannel!='null' && this.$route.query.shipChannel!=null) {
+        this.returnData.shipChannel = this.$route.query.shipChannel
+    }
+    if(this.$route.query.shipSn!='null' && this.$route.query.shipSn!=null) {
+        this.returnData.shipSn = this.$route.query.shipSn
+    }
+    if(this.returnData.shipChannel!=''&& this.returnData.shipSn!=''){
+        this.canchange = false
+    }
+  },
 
   mounted () {},
 
-  methods: {}
+  methods: {
+      
+            returnOrder() {
+                if(this.returnData.shipChannel==='') {
+                    this.toast('请填写快递公司！')
+                    return
+                }
+                if(this.returnData.shipSn==='') {
+                    this.toast('请填写快递单号！')
+                    return
+                }
+                let dto = {
+                    ...this.returnData,
+                    "orderId": this.orderId
+                }
+                this.POST('api/tradeOrder/back', dto, res => {
+                    let result = res.data.result;
+                    if (result){
+                        this.toast('归还成功！')
+                        this.nextStep()
+                    } else {
+                        this.toast('归还失败！请重新尝试！')
+                    }
+                });
+            },
+            nextStep() {
+                if(this.$mp.platform == 'alipay') {
+                    my.redirectTo({
+                        url: '/pages/orderList/index'
+                    })
+                    } else {
+                    wx.redirectTo({
+                        url: '/pages/orderList/index'
+                    })
+                }
+            }
+        
+  }
 }
 
 </script>
@@ -81,7 +145,7 @@ export default {
         text-align: left;
     }
     .header-container{
-        width: 375px;
+        width: 100%;
         height: 150px;
         background: linear-gradient(to bottom right, #f24f18 , #ffc561);
         color: #fff;
@@ -93,8 +157,9 @@ export default {
         padding-left: 15px;
     }
     .rent-container {
-        width: 346px;
-        margin-left: 14px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
         font-size: 13px;
         padding: 10px 0;
         border: 1px solid #FAFAFA;
@@ -155,7 +220,8 @@ export default {
         border-radius: 20px;
         text-align: center;
         width: 346px;
-        margin-left: 14px;
+        left: 50%;
+        margin-left: -173px;
         line-height:40px;
         font-weight: 400;
         font-size: 15px;

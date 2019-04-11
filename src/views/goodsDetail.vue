@@ -128,12 +128,13 @@
 </template>
 
 <script>
+import mixins from '../mixins'
 import {axiosHeaders} from "@/assets/api" 
-import { Toast } from 'mint-ui';
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import LoginDialog from '../components/loginDialog.vue';
 export default {
-  name: '',
+  name: 'goodsDetail',
+  mixins: [mixins], 
 
   components: {
     swiper,

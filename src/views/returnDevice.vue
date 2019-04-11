@@ -4,14 +4,6 @@
 
 <template>
   <div>
-<<<<<<< HEAD
-      <div class="wrapper">
-        <div class="header-container">
-            <p class="header-p1">到期归还</p>
-            <p class="header-p2">未租满1个月归还需缴纳一个月的租金</p>
-        </div>
-        <div class="product-detail-container">
-=======
     <div class="wrapper">
       <div class="header-container">
         <p class="header-p1">到期归还</p>
@@ -20,8 +12,7 @@
     </div>
 
     <div class="product-detail-container">
->>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
-            <!--<order-product :product="productSub"></order-product>-->
+            <order-product :product="productSub"></order-product>
         </div>
         <div class="rent-container">
             <div class="rent1">
@@ -58,23 +49,27 @@
         <div class="startOrder">
             下一步
         </div>
-<<<<<<< HEAD
-    </div>
-
-
-=======
->>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
   </div>
 </template>
 
 <script>
+import mixins from '../mixins'
+import {axiosHeaders} from "@/assets/api" 
+import OrderProduct from '../components/orderProduct.vue';
 export default {
-  name: '',
+  name: 'returnDevice',
+  mixins: [mixins], 
 
-  components: {},
+  components: {
+      'order-product': OrderProduct
+  },
 
-  data () {
+  data () {    
     return {
+        productSub: {},
+        orderDetail: {},
+        orderId: '',
+        canClick:true
     }
   },
 
@@ -82,11 +77,76 @@ export default {
 
   watch: {},
 
-  created () {},
+  created () {
+      this.orderId = this.$route.query.orderId
+      this.getOrderDetail()
+  },
 
   mounted () {},
 
-  methods: {}
+  methods: {
+      getOrderDetail() {
+          this.$axios.post('/mall/api/tradeOrder/backInfo',
+            {"orderId": this.orderId},
+            axiosHeaders
+          ).then(res => {
+                if(res.data.ok){
+                    let result = res.data.result;
+                    this.orderDetail = result
+                    let productSub = {}
+                    productSub.name = result.tradeOrderGoodsRespDTO.goodsName
+                    productSub.picUrl = result.tradeOrderGoodsRespDTO.picUrl
+                    productSub.descList = result.tradeOrderGoodsRespDTO.specifications
+                    productSub.totalRent = result.totalRentAmount 
+                    this.productSub = productSub
+                } else {
+                    this.canClick = false
+                    this.toast(res.data.msg)
+                }
+          })
+        },
+        nextStep() {
+            console.log(this.canClick)
+            if(this.canClick==false) {
+                return 0
+            }
+            console.log(1111)
+        },
+        getOrderDetailTest() {
+                let result = {
+                    "tradeOrderId": 394,
+                    "isBacking": true,
+                    "tradeOrderGoodsRespDTO": {
+                    "goodsName": "iPhone7    国行三网通 99新",
+                    "specifications": [
+                        "金色",
+                        "32G"
+                    ],
+                    "picUrl": "http://rent-mall.oss-cn-beijing.aliyuncs.com/kvpn168xxo4glnyhm2n0.png"
+                    },
+                    "totalRentAmount": 0.03,
+                    "beginTime": "2018-07-25",
+                    "endTime": "2018-10-25",
+                    "totalPayAmount": 0.01,
+                    "penalAmount": 0,
+                    "overdueAmount": 0,
+                    "totalRepayAmount": 0,
+                    "receiveName": "小北",
+                    "postCode": "310000",
+                    "mobile": "0571-86507022",
+                    "address": "杭州市萍水街 333 号御峰大厦 1922 室",
+                    "shipChannel": "xumin746854",
+                    "shipSn": "东风"
+                }
+                this.orderDetail = result
+                let productSub = {}
+                productSub.name = result.tradeOrderGoodsRespDTO.goodsName
+                productSub.picUrl = result.tradeOrderGoodsRespDTO.picUrl
+                productSub.descList = result.tradeOrderGoodsRespDTO.specifications
+                productSub.totalRent = result.totalRentAmount 
+                this.productSub = productSub
+        }
+  }
 }
 
 </script>
@@ -94,10 +154,9 @@ export default {
  .wrapper{
         background-color: #ffffff;
         font-family:microsoft yahei;
-        height: 50px;
     }
   .header-container{
-        width: 375px;
+        width: 100%;
         height: 100px;
         background: linear-gradient(to bottom right, #f24f18 , #ffc561);
         color: #fff;
@@ -107,34 +166,25 @@ export default {
         justify-content: center;
         font-size: 15px;
         padding-left: 15px;
-<<<<<<< HEAD
         text-align: left;
-=======
->>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
     }
     .header-container .header-p1 {
         font-weight: 700;
     }
     .product-detail-container {
-        width: 346px;
-        margin-left: 14px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
         border: 1px solid #FAFAFA;
         border-radius: 10px;
         margin-top: 10px;
         height: 110px;
-<<<<<<< HEAD
-        box-shadow: 1px 1px 7px #cccccc;
-    }
-    .rent-container {
-        width: 346px;
-        margin-left: 14px;
-=======
         box-shadow: 1px 1px 7rpx #cccccc;
     }
     .rent-container {
-        width: 346px;
-        margin-left: 14rpx;
->>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
         font-size: 15px;
         padding: 10px 0;
         border: 1px solid #FAFAFA;
@@ -187,11 +237,8 @@ export default {
     .text-container {
         font-size: 13px;
         margin:15px;
-<<<<<<< HEAD
         text-align: left;
-        line-height: 20px;
-=======
->>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
+        line-height: 24px;
     }
     .startOrder{
         color: #fff;
@@ -200,7 +247,8 @@ export default {
         border-radius: 20px;
         text-align: center;
         width: 346px;
-        margin-left: 14px;
+        left: 50%;
+        margin-left: -173px;
         line-height: 40px;
         font-weight: 400;
         font-size: 15px;
