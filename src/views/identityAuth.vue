@@ -1,5 +1,6 @@
 <!-- D:\jz\src\pages\realName -->
 <template>
+<<<<<<< HEAD
  <div>
     <div class="wrapper">
         <!-- v-if="userNoAuth" -->
@@ -83,6 +84,15 @@
         </div>
     </div>
 </div>
+=======
+  <div>身份认证
+    <mt-radio
+  title="radio list"
+  v-model="value"
+  :options="['optionA', 'optionB', 'optionC']">
+</mt-radio>
+  </div>
+>>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
 </template>
 
 

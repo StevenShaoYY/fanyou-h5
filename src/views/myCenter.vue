@@ -28,7 +28,7 @@
                 <div class="set-text">地址管理</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
             </div>
-            <div class="my-set-container" @click="goToUrl('/pages/orderList/index')">
+            <div class="my-set-container" @click="goToUrl('/orderProduct')">
                 <img class="icon" src="@/assets/images/tab_order_current.png" alt="">
                 <div class="set-text">我的订单</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="section">
-            <div class="my-set-container" @click="goToUrl('/pages/helper/index')">
+            <div class="my-set-container" @click="goToUrl('/help')">
                 <img class="icon" src="@/assets/images/icon_question_mine.png" alt="">
                 <div class="set-text">帮助中心</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
@@ -86,30 +86,10 @@ export default {
 
   methods: {      
     call() {
-        // if(this.$mp.platform == 'alipay') {
-        //     my.makePhoneCall({ 
-        //         number: '0571-86507022' 
-        //     })
-        // } else {
-        //     wx.makePhoneCall({
-        //         phoneNumber: '0571-86507022'
-        //     })
-        // }
+        window.location.href = 'tel://0571-86507022'
     },
     goToUrl(url) {
-        // if(!this.checkLogin()){
-        //     this.showLogin=true
-        //     return
-        // }
-        // if(this.$mp.platform === 'alipay') {
-        //     my.navigateTo({
-        //         url: url
-        //     })
-        // } else {
-        //     wx.navigateTo({
-        //         url: url
-        //     })
-        // }
+        this.$router.push(url)
     },
     checkLogin() {
         // if(getApp().globalData.accessToken === '') {

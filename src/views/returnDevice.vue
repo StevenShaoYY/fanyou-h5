@@ -4,12 +4,23 @@
 
 <template>
   <div>
+<<<<<<< HEAD
       <div class="wrapper">
         <div class="header-container">
             <p class="header-p1">到期归还</p>
             <p class="header-p2">未租满1个月归还需缴纳一个月的租金</p>
         </div>
         <div class="product-detail-container">
+=======
+    <div class="wrapper">
+      <div class="header-container">
+        <p class="header-p1">到期归还</p>
+        <p class="header-p2">未租满1个月归还需缴纳一个月的租金</p>
+      </div>
+    </div>
+
+    <div class="product-detail-container">
+>>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
             <!--<order-product :product="productSub"></order-product>-->
         </div>
         <div class="rent-container">
@@ -47,9 +58,12 @@
         <div class="startOrder">
             下一步
         </div>
+<<<<<<< HEAD
     </div>
 
 
+=======
+>>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
   </div>
 </template>
 
@@ -93,7 +107,10 @@ export default {
         justify-content: center;
         font-size: 15px;
         padding-left: 15px;
+<<<<<<< HEAD
         text-align: left;
+=======
+>>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
     }
     .header-container .header-p1 {
         font-weight: 700;
@@ -105,11 +122,19 @@ export default {
         border-radius: 10px;
         margin-top: 10px;
         height: 110px;
+<<<<<<< HEAD
         box-shadow: 1px 1px 7px #cccccc;
     }
     .rent-container {
         width: 346px;
         margin-left: 14px;
+=======
+        box-shadow: 1px 1px 7rpx #cccccc;
+    }
+    .rent-container {
+        width: 346px;
+        margin-left: 14rpx;
+>>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
         font-size: 15px;
         padding: 10px 0;
         border: 1px solid #FAFAFA;
@@ -162,8 +187,11 @@ export default {
     .text-container {
         font-size: 13px;
         margin:15px;
+<<<<<<< HEAD
         text-align: left;
         line-height: 20px;
+=======
+>>>>>>> 7e139bf7756e76d82fe38f2355aaa2196cec6ba9
     }
     .startOrder{
         color: #fff;
