@@ -91,6 +91,15 @@ export default new Router({
       }
     },
     {
+      path: "/returnDeviceConfirm",
+      name: "returnDeviceConfirm",
+      component: () => import("./views/returnDeviceConfirm.vue"),
+      meta: {
+        title: '设备归还确认',        
+        showBottomTabBar: false
+      }
+    },
+    {
       path: "/identityAuth",
       name: "identityAuth",
       component: () => import("./views/identityAuth.vue"),

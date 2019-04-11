@@ -4,7 +4,7 @@
 
 <template>
   <div>
-      <scroll-view scroll-y=true class="wrapper">
+      <div class="wrapper">
         <div class="header-container">
             <p class="header-p1">到期归还</p>
             <p class="header-p2">未租满1个月归还需缴纳一个月的租金</p>
@@ -47,7 +47,7 @@
         <div class="startOrder">
             下一步
         </div>
-    </scroll-view>
+    </div>
 
 
   </div>
@@ -93,6 +93,7 @@ export default {
         justify-content: center;
         font-size: 15px;
         padding-left: 15px;
+        text-align: left;
     }
     .header-container .header-p1 {
         font-weight: 700;
@@ -104,11 +105,11 @@ export default {
         border-radius: 10px;
         margin-top: 10px;
         height: 110px;
-        box-shadow: 1px 1px 7rpx #cccccc;
+        box-shadow: 1px 1px 7px #cccccc;
     }
     .rent-container {
         width: 346px;
-        margin-left: 14rpx;
+        margin-left: 14px;
         font-size: 15px;
         padding: 10px 0;
         border: 1px solid #FAFAFA;
@@ -161,6 +162,8 @@ export default {
     .text-container {
         font-size: 13px;
         margin:15px;
+        text-align: left;
+        line-height: 20px;
     }
     .startOrder{
         color: #fff;
