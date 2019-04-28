@@ -23,7 +23,7 @@
                 <div class="set-text">实名认证</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
             </div>
-            <div class="my-set-container" @click="goToUrl('/pages/addressManage/index')">
+            <div class="my-set-container" @click="goToUrl('addressManage')">
                 <img class="icon2" src="@/assets/images/ic_address.png" alt="">
                 <div class="set-text">地址管理</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
@@ -33,12 +33,12 @@
                 <div class="set-text">我的订单</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
             </div>
-            <div class="my-set-container" @click="goToUrl('/pages/mycollect/index')">
+            <div class="my-set-container" @click="goToUrl('/mycollect')">
                 <img class="icon" src="@/assets/images/icon_collect_mine.png" alt="">
                 <div class="set-text">我的收藏</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
             </div>
-            <div class="my-set-container" @click="goToUrl('/pages/mycomment/index')">
+            <div class="my-set-container" @click="goToUrl('/mycomment')">
                 <img class="icon" src="@/assets/images/icon_comment_mine.png" alt="">
                 <div class="set-text">我的评论</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
@@ -89,9 +89,16 @@ export default {
         window.location.href = 'tel://0571-86507022'
     },
     goToUrl(url) {
-        this.$router.push(url)
+        if(this.checkLogin())
+            this.$router.push(url)
     },
     checkLogin() {
+        console.log(localStorage.getItem('ACCESS_TOKEN'))
+        if(localStorage.getItem('ACCESS_TOKEN')==''||localStorage.getItem('ACCESS_TOKEN')==null) {
+            this.$router.push('/login')
+        } else {
+            return true
+        }
         // if(getApp().globalData.accessToken === '') {
         //     return false
         // } else {

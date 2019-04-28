@@ -15,39 +15,40 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style lang='scss' scoped>
+@import '../assets/styles/global';
     .wrapper{
-      height: 245rpx;
-      width: 630rpx;
-      margin-left: 30rpx;
+      height: px2rem(122);
+      width: px2rem(315);
+      margin-left: px2rem(15);
       border-bottom: 1px solid #f5f5f5
     }
     .first-section {
       display: flex;
       flex-direction: row;
-      margin-top: 30rpx;
+      margin-top: px2rem(15);
     }
     .image {
-      width: 90rpx;
-      height: 90rpx;
-      margin-right: 25rpx;
+      width: px2rem(45);
+      height: px2rem(45);
+      margin-right: px2rem(12.5);
     }
     .inner-container {
       display: flex;
       flex-direction: column;
-      font-size: 26rpx;
+      font-size: px2rem(13);
       font-weight: 400;
     }
     .user-text {
-      line-height: 60rpx;
+      line-height: px2rem(30);
     }
     .second-section {
-      margin-top: 30rpx;
-      font-size: 26rpx;
+      margin-top: px2rem(15);
+      font-size: px2rem(13);
     }
     .third-section {
-      margin-top: 30rpx;
-      font-size: 24rpx;
+      margin-top: px2rem(15);
+      font-size: px2rem(12);
       color: #a8a8a8;
     }
 </style>

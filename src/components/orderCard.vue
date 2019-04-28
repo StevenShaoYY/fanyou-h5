@@ -38,6 +38,7 @@
       background-color: #EF7000;
       height: 30px;
       color: #ffffff;
+      text-align: left;
       line-height: 30px;
       border-radius: 7px 7px 0 0; 
       padding-left: 15px;
@@ -206,15 +207,7 @@
                 }
             },
           gotoDetail() {
-            if(this.$mp.platform=='alipay'){
-              my.navigateTo({
-                url: `/pages/orderDetail/index?id=${this.data.orderId}`
-              })
-            } else {
-              wx.navigateTo({
-                url: `/pages/orderDetail/index?id=${this.data.orderId}`
-              })
-            }
+            this.$router.push(`/orderDetail/index?id=${this.data.orderId}`)
           },
           payRest() {
             if(this.$mp.platform=='alipay'){

@@ -4,7 +4,8 @@
     <img class="star" v-for="(item,index) of fakeList" :key="index" src="/static/images/star_evaluate_disable.png" alt="">
   </div>
 </template>
-<style scoped>
+<style lang='scss' scoped>
+@import '../assets/styles/global';
     .iconfont {
         font-family:iconfont;
     }
@@ -12,12 +13,12 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      width: 180rpx;
-      height: 30rpx;
+      width: px2rem(90);
+      height: px2rem(346)15;
     }
     .star{
-      width: 30rpx;
-      height: 30rpx;
+      width: px2rem(15);
+      height: px2rem(15);
     }
 </style>
 <script>

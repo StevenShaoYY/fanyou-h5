@@ -1,30 +1,72 @@
 <!-- D:\jz\src\pages\mycomment -->
 <template>
-  <div>我的评论</div>
+  <div class="wrapper">
+        <div class="comment-container has-comment" v-if="commentList.length>0">
+            <comment-card2 v-for="(item, index) of commentList" :key="index" :commentItem="item"></comment-card2>
+        </div>
+        <div class="comment-container no-comment-container" v-if="commentList.length==0">
+            <div class="no-comment">暂无评论</div>
+        </div>
+    </div>
 </template>
 
 <script>
+import CommentCard2 from '../components/commentCard2.vue';
+import {axiosHeaders} from "@/assets/api"
+import axios from 'axios'
 export default {
   name: '',
 
-  components: {},
-
-  data () {
-    return {
-    }
+ components: {
+      'comment-card2': CommentCard2
   },
-
-  computed: {},
-
-  watch: {},
-
-  created () {},
+  data () {
+      return {
+          commentList:[]
+      }
+  },
+  created () {
+    this.getCommentList()
+  },
 
   mounted () {},
 
-  methods: {}
+  methods: {
+    getCommentList() {
+        let commentDto = {
+            "pageNum": 1,
+            "pageSize":100
+        }
+        this.$axios.post('/mall/comment/userList',
+          commentDto,
+          axiosHeaders
+        ).then(res => {
+            let result = res.data.result;
+            this.commentList = result.list;
+        })
+    }
+  }
 }
 
 </script>
 <style lang='scss' scoped>
+@import '../assets/styles/global';
+.comment-container {
+        font-family:microsoft yahei;
+        width: px2rem(346);
+        min-height: calc(100vh - 60px);
+        margin-left: px2rem(15);
+        border: 1px solid #FAFAFA;
+        border-radius: px2rem(10);
+        margin-top: px2rem(15);
+        box-shadow: 2px 2px 50px #cccccc;
+    }
+    .no-comment-container {
+        font-family:microsoft yahei;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        color: #a8a8a8;
+    }
 </style>

@@ -80,7 +80,9 @@ export default {
 
   watch: {},
 
-  created () {},
+  created () {
+  console.log(111)
+  },
 
   mounted () {},
 

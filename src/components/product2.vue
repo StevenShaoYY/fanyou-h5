@@ -13,15 +13,16 @@
   </div>
 </template>
 
-<style scoped>
+<style lang='scss' scoped>
+@import '../assets/styles/global';
     .product2{
         background-color: #ffffff;
-        border-radius: 15rpx; 
+        border-radius: px2rem(7.5); 
         border: 1px solid #FAFAFA;
         box-shadow: 2rpx 2rpx 50rpx #cccccc;
-        width: 346px;
-        height: 110px;
-        margin-bottom: 10px;     
+        width: px2rem(182);
+        height: px2rem(55);
+        margin-bottom: px2rem(5);     
     }
     .product-item {
       display: flex;
@@ -29,22 +30,22 @@
     .product-item .img {
       width: 85px;
       height: 85px;
-      margin-top: 12px;
-      margin-left: 12px;
+      margin-top: px2rem(6);
+      margin-left: px2rem(6);
     }
     .item-container {
       /* flex:617rpx; */
-      width: 209px;
-      margin-left: 12px;
-      margin-top: 15px;
+      width: px2rem(105);
+      margin-left: px2rem(6);
+      margin-top: px2rem(7);
     }
     .item-container .title {
-      font-size: 18px;
+      font-size: px2rem(9);
       font-weight: 400;
       white-space:nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      line-height: 20px;
+      line-height: px2rem(10);
       color: #020202;
       text-align: left;
     }
@@ -53,11 +54,11 @@
       flex-direction: row;
     }
     .sub-item {
-      margin: 10px 5px 7px 0;
-      height: 20px;
-      padding: 0 7px;
-      line-height: 20px;
-      font-size: 12px;
+      margin: px2rem(5) px2rem(2) px2rem(3) 0;
+      height: px2rem(10);
+      padding: 0 px2rem(7);
+      line-height: px2rem(10);
+      font-size: px2rem(6);
       color: #ffffff;
       display: block;
     }
@@ -74,16 +75,16 @@
       background-color: #000000
     }
     .item-container .price {
-      font-size: 18px;
+      font-size: px2rem(9);
       font-weight: 700;
-      line-height: 20px;
+      line-height: px2rem(10);
       color: #020202;
       text-align: left;
     }
     .item-container .price .span{
-      font-size: 16px;
+      font-size: px2rem(8);
       font-weight: 100;
-      line-height: 20px;
+      line-height: px2rem(10);
     }
 </style>
 <script>
