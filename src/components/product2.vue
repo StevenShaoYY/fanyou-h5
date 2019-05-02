@@ -17,35 +17,37 @@
 @import '../assets/styles/global';
     .product2{
         background-color: #ffffff;
-        border-radius: px2rem(7.5); 
+        border-radius: 15px; 
         border: 1px solid #FAFAFA;
-        box-shadow: 2rpx 2rpx 50rpx #cccccc;
-        width: px2rem(182);
-        height: px2rem(55);
-        margin-bottom: px2rem(5);     
+        box-shadow: 2px 2px 50px #cccccc;
+        width: 94vw;
+        height: 120px;
+        margin-bottom: px2rem(10);     
     }
     .product-item {
       display: flex;
+      height: 110px;
+      align-items: center;
     }
     .product-item .img {
-      width: 85px;
-      height: 85px;
+      width: px2rem(85);
+      height: px2rem(85);
       margin-top: px2rem(6);
       margin-left: px2rem(6);
     }
     .item-container {
       /* flex:617rpx; */
-      width: px2rem(105);
-      margin-left: px2rem(6);
-      margin-top: px2rem(7);
+      width: px2rem(210);
+      margin-left: px2rem(12);
+      margin-top: px2rem(14);
     }
     .item-container .title {
-      font-size: px2rem(9);
+      font-size: px2rem(18);
       font-weight: 400;
       white-space:nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      line-height: px2rem(10);
+      line-height: px2rem(20);
       color: #020202;
       text-align: left;
     }
@@ -54,11 +56,11 @@
       flex-direction: row;
     }
     .sub-item {
-      margin: px2rem(5) px2rem(2) px2rem(3) 0;
-      height: px2rem(10);
-      padding: 0 px2rem(7);
-      line-height: px2rem(10);
-      font-size: px2rem(6);
+      margin: px2rem(10) px2rem(4) px2rem(6) 0;
+      height: px2rem(20);
+      padding: 0 px2rem(14);
+      line-height: px2rem(20);
+      font-size: px2rem(12);
       color: #ffffff;
       display: block;
     }
@@ -75,16 +77,16 @@
       background-color: #000000
     }
     .item-container .price {
-      font-size: px2rem(9);
+      font-size: px2rem(19);
       font-weight: 700;
-      line-height: px2rem(10);
+      line-height: px2rem(20);
       color: #020202;
       text-align: left;
     }
     .item-container .price .span{
-      font-size: px2rem(8);
+      font-size: px2rem(16);
       font-weight: 100;
-      line-height: px2rem(10);
+      line-height: px2rem(20);
     }
 </style>
 <script>

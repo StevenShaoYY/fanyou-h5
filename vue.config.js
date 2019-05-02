@@ -1,6 +1,7 @@
 const path = require('path')
 const debug = process.env.NODE_ENV !== 'production'
-function resolve (dir) {
+
+function resolve(dir) {
     return path.join(__dirname, dir)
 }
 
@@ -30,9 +31,9 @@ module.exports = {
     chainWebpack: config => { // webpack链接API，用于生成和修改webapck配置，https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
         config.resolve.alias
             .set('@', resolve('src'))
-            .set('assets',resolve('src/assets'))
-            .set('components',resolve('src/components'))
-            .set('layout',resolve('src/views/layout'));
+            .set('assets', resolve('src/assets'))
+            .set('components', resolve('src/components'))
+            .set('layout', resolve('src/views/layout'));
         if (debug) {
             // 本地开发配置
         } else {
@@ -52,20 +53,22 @@ module.exports = {
         hotOnly: false,
         proxy: { // 配置跨域
             '/mall': {
-                target: 'https://test.fanyoutech.com:7002',           // https://prod1.fanyoutech.com:7003     
+                // target: 'https://test.fanyoutech.com:7002',
+                target: 'https://prod1.fanyoutech.com:7003',
                 changOrigin: true,
                 pathRewrite: {
-                  '^/mall': '/mall'
+                    '^/mall': '/mall'
                 }
             },
             '/user': {
-                target: 'https://test.fanyoutech.com:7002',           // https://test.fanyoutech.com:7002     
+                // target: 'https://test.fanyoutech.com:7002',    
+                target: 'https://prod1.fanyoutech.com:7003',
                 changOrigin: true,
                 pathRewrite: {
-                  '^/user': '/user/userBase'
+                    '^/user': '/user/userBase'
                 }
             }
         },
-        before: app => { }
+        before: app => {}
     }
 }

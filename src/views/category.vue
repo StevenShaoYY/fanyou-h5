@@ -62,11 +62,6 @@ export default {
               j.goodsDetailUrl = `/pages/goodsDetail/index?id=${j.id}`
           }
           this.categoryList = result;
-          if (this.$route.platform === 'alipay') {
-              // my.stopPullDownRefresh()
-          } else {
-              // wx.stopPullDownRefresh()
-          }
         })
     },
     getTopicList() {
@@ -80,18 +75,11 @@ export default {
           commentDto,
           axiosHeaders
         ).then(res => {
-          this.POST('topic/detail', commentDto, res => {
-            let result = res.data.result;
-            for (let j of result.goodsList) {
-                j.goodsDetailUrl = `/pages/goodsDetail/index?id=${j.id}`
-            }
-            this.categoryList = result.goodsList;
-            if (this.$route.platform === 'alipay') {
-                my.stopPullDownRefresh()
-            } else {
-                wx.stopPullDownRefresh()
-            }
-          });
+          let result = res.data.result;
+          for (let j of result.goodsList) {
+              j.goodsDetailUrl = `/pages/goodsDetail/index?id=${j.id}`
+          }
+          this.categoryList = result.goodsList;
         })
     }
   }
@@ -105,8 +93,8 @@ export default {
 .wrapper{
     font-family:microsoft yahei;
     font-size: 13px;
-    margin-left: 13px;
-    width: 346px;
+    margin-left: 3vw;
+    width: 94vw;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;

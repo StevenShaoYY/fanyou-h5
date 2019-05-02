@@ -3,7 +3,7 @@
   <div>
     <div class="container" :style="divStyle">
       <section class="header">
-          <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+          <swiper class="goodsimgs" direction="horizontal" :option="swiperOption" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
               <swiper-slide v-for="(item, index) of goodsDetail.gallery" :key="index" :data-index="index">
                   <img class="image" :src="item" background-size="cover"/>
               </swiper-slide>
@@ -11,7 +11,7 @@
           <div class="goods-title">{{goodsDetail.name}}</div>
           <div class="goods-price-container">
               <div class="rent-price">¥<span class="big-price">{{goodsDetail.rentPrice}}</span><span class="normal-font">/{{goodsDetail.periodUnit}}</span></div>
-              <div class="total-price">1商品价值：¥{{goodsDetail.retailPrice}}</div>
+              <div class="total-price">商品价值：¥{{goodsDetail.retailPrice}}</div>
           </div>
       </section>
       <ul class="tab-list">
@@ -165,7 +165,10 @@ export default {
         hasScrollB:false,
         hasScrollT:false,
         canScroll: true,
-        divStyle: ''
+        divStyle: '',
+        swiperOption:{
+            direction: 'horizontal'
+        }
     }
   },
 
@@ -615,6 +618,7 @@ export default {
 
 </script>
 <style lang='scss' scoped>
+@import '../assets/styles/global';
     .zuling-box{
         text-align: left;
     }
@@ -799,16 +803,16 @@ export default {
     }
     .attr-pop-box {
         position: fixed;
-        width: 100%;
+        width: 100vw;
         height: 100%;
         background: rgba(0, 0, 0, .5);
         z-index: 8;
         bottom: 0;
     }
     .attr-pop {
-        width: 374px;
-        left: 50%;
-        margin-left: -187px;
+        width: 100vw;
+        // left: 50%;
+        // margin-left: -187px;
         border-radius: 25px 25px 0 0;
         height: auto;
         max-height: 980rpx;
@@ -821,7 +825,7 @@ export default {
     }
     .img-info {
         position: fixed;
-        width: 374px;
+        width: 100vw;
         height: 150px;
         background-color: #FFF6EF;
         display: flex;
@@ -863,7 +867,7 @@ export default {
     }
     .price-container {
         position: fixed;
-        width: 375px;
+        width: 100vw;
         background-color: #ffffff;
         margin-top: 150px;
         display: flex;
@@ -884,7 +888,7 @@ export default {
         margin-top: 5px;
     }
     .spec-con {
-        width: 346px;
+        width: 100vw;
         margin-left: 14px;
         display: flex;
         flex-direction: column;
@@ -920,7 +924,7 @@ export default {
         margin-top: 15px;
     }
     .yiwao-container {
-        width: 346px;
+        width: 100vw;
         margin-left: 14px;
         border-top: 1px solid #e7e7e7;
         padding-top: 15px;
@@ -972,7 +976,7 @@ export default {
     }
     .bottom-btn-container {
         background-color: #ffffff;
-        width: 375px;
+        width: 100vw;
         height: 70px;
         position: fixed;
         bottom: 0;
@@ -983,8 +987,8 @@ export default {
         height: 40px;
         border-radius: 20px;
         text-align: center;
-        width: 346px;
-        margin-left: 14px;
+        width: 90vw;
+        margin-left: 5vw;
         line-height: 40px;
         font-weight: 400;
         font-size: 15px;
