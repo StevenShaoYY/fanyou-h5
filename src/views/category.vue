@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="wrapper">
-      <mt-header fixed title="凡有e租"></mt-header>
+      <header-bar></header-bar>
       <div class="productbox">
         <productl v-for="item of categoryList" :key="item.id" :productItem="item"></productl>
       </div>      
@@ -14,11 +14,13 @@
 <script>
 import {axiosHeaders} from "@/assets/api"
 import Product2 from '../components/product2.vue';
+import HeaderBar from '../components/headerBar.vue';
 export default {
   name: 'category',
 
   components: {
-    'productl': Product2
+    'productl': Product2,
+    HeaderBar
   },
 
   data () {

@@ -53,19 +53,19 @@ module.exports = {
         hotOnly: false,
         proxy: { // 配置跨域
             '/mall': {
-                // target: 'https://test.fanyoutech.com:7002',
-                target: 'https://prod1.fanyoutech.com:7003',
+                target: 'https://test.fanyoutech.com:7002',
+                // target: 'https://prod1.fanyoutech.com:7003',
                 changOrigin: true,
                 pathRewrite: {
                     '^/mall': '/mall'
                 }
             },
             '/user': {
-                // target: 'https://test.fanyoutech.com:7002',    
-                target: 'https://prod1.fanyoutech.com:7003',
+                target: 'https://test.fanyoutech.com:7002',
+                // target: 'https://prod1.fanyoutech.com:7003',
                 changOrigin: true,
                 pathRewrite: {
-                    '^/user': '/user/userBase'
+                    '^/user': '/user'
                 }
             }
         },

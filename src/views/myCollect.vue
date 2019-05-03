@@ -1,6 +1,7 @@
 <!-- D:\jz\src\pages\mycollect -->
 <template>
     <div class="wrapper">
+        <mt-header fixed title="凡有e租"></mt-header>
         <productl v-for="item of categoryList" :key="item.id" :productItem="item"></productl>
         <div class="comment-container no-comment-container" v-if="categoryList.length==0">
             <div class="no-comment">暂无收藏</div>
@@ -68,9 +69,9 @@ export default {
     font-family:microsoft yahei;
     font-size: px2rem(13);
     margin-left: px2rem(13);
-    width: px2rem(346);
+    width: 94vw;
     margin-top: px2rem(15);
-    margin-left: px2rem(15);
+    margin-left: 3vw;
     line-height: px2rem(15);
 }
 .no-comment-container {

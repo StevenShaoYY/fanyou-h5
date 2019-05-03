@@ -4,11 +4,15 @@ import axios from "./http";
 import router from "./router";
 import store from "./store";
 import MintUI from "mint-ui";
+import { Toast } from 'mint-ui';
 import "mint-ui/lib/style.css";
 import "@/assets/styles/global.scss"
 Vue.use(MintUI);
 Vue.prototype.$axios = axios;
 
+Vue.prototype.toast = (msg) => {
+    Toast(msg)
+}
 Vue.config.productionTip = false;
 // 判断该路由是否需要登录权限
 // router.beforeEach((to) => {
@@ -20,7 +24,7 @@ Vue.config.productionTip = false;
 // })
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");

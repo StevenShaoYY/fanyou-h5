@@ -36,7 +36,7 @@ export default {
   methods: {
     getCode() {
       if(this.mobile){
-        this.$axios.post('/user/sendMessage',
+        this.$axios.post('/user/userBase/sendMessage',
           {
             mobile: this.mobile
           },
@@ -56,7 +56,7 @@ export default {
     login() {
       if(this.mobile && this.code){
         localStorage.setItem('ACCESS_TOKEN', '');
-        this.$axios.post('/user/login',
+        this.$axios.post('/user/userBase/login',
           {
             code: this.code,
             mobile: this.mobile

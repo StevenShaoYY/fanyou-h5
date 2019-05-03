@@ -21,12 +21,12 @@
         border: 1px solid #FAFAFA;
         box-shadow: 2px 2px 50px #cccccc;
         width: 94vw;
-        height: 120px;
+        height: px2rem(115);
         margin-bottom: px2rem(10);     
     }
     .product-item {
       display: flex;
-      height: 110px;
+      height: px2rem(110);
       align-items: center;
     }
     .product-item .img {

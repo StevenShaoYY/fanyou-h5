@@ -109,6 +109,8 @@ export default {
 <style lang='scss' scoped>
 @import '../assets/styles/global';
 .index{
+  height: calc(100vh - 50px);
+  overflow-y: auto;
   .homeSwiper{
     margin: 40px 20px 0 20px;
     border-radius: 6px;
