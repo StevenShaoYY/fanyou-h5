@@ -1,6 +1,7 @@
 <!-- D:\jz\src\pages\helper\index.vue -->
 <template>
   <div class="help">
+    <header-bar></header-bar>
     <div class="comment-container no-comment-container" v-if="faqList.length==0">
         <div class="no-comment">暂无帮助</div>
     </div>
@@ -20,10 +21,13 @@
 <script>
 import axios from 'axios'
 import {axiosHeaders} from "@/assets/api"
+import HeaderBar from '../components/headerBar.vue';
 export default {
   name: '',
 
-  components: {},
+  components: {
+    HeaderBar
+  },
 
   data () {
     return {
@@ -69,6 +73,7 @@ export default {
     font-family:microsoft yahei;
     background-color: #fff;
     min-height: 100%;
+    margin-top: 50px;
 }
 .comment-container {
     font-family:microsoft yahei;

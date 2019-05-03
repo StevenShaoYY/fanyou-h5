@@ -1,17 +1,18 @@
 <!-- D:\jz\src\pages\orderList -->
 <template>
   <div class="container">
+    <header-bar></header-bar>
     <ul class="tab-list">
         <li class="ta-li" v-for="(item,index) of tabList" :key="index" :class="{'active':index==activeItem}" @click="switchTab(index)">
         {{item.remark}}
         </li>
     </ul>
-    <swiper :options="swiperOption" class="homeSwiper">
+    <swiper :options="swiperOption" @slideChangeTransitionEnd="swiperEnd" ref="mySwiper" class="homeSwiper">
       <swiper-slide class="orderSwiperSlide" v-for="(item, i) in detailList" :key="i" >
-        <div class="comment-container has-comment" v-if="item.data.length>0">
+        <div class="comment-container has-comment" v-if="item.data.length>0&& showFlag==true">
             <order-card v-for="(item1, index1) of item.data" :key="index1" :data="item1" @fresh="refreshPage"></order-card>
         </div>
-        <div class="no-order-container" v-if="item.data.length==0">
+        <div class="no-order-container" v-if="item.data.length==0 && showFlag==true">
             <div class="no-comment">暂无订单</div>
         </div>
       </swiper-slide>
@@ -25,13 +26,15 @@ import "swiper/dist/css/swiper.css";
 import {axiosHeaders} from "@/assets/api"
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import orderCard from '../components/orderCard.vue';
+import HeaderBar from '../components/headerBar.vue';
 export default {
   name: '',
 
   components: {
     swiper,
     swiperSlide,
-    orderCard
+    orderCard,
+    HeaderBar
   },
 
   data () {
@@ -65,7 +68,8 @@ export default {
                 data: []
             },
         ],
-        winHeight: ''
+        winHeight: '',
+        showFlag:false
     }
   },
 
@@ -92,8 +96,8 @@ export default {
         let result = res.data.result;
         this.tabList = result
         for(let i in this.tabList) {
-            this.$set(this.detailList[i],'id',this.tabList[i].status)
-            // this.detailList[i].id = this.tabList[i].status
+            // this.$set(this.detailList[i],'id',this.tabList[i].status)
+            this.detailList[i].id = this.tabList[i].status
         }
         this.getOrderByStatus(this.tabList[0].status, 0)
       });
@@ -101,19 +105,35 @@ export default {
     getOrderByStatus(sta ,index) {
         let dto = {
             "orderStatus": sta,
-            "pageNum": 0,
-            "pageSize": 0
+            "pageNum": 1,
+            "pageSize": 100
         }
         this.$axios.post('/mall/api/tradeOrder/list',
           dto,
           axiosHeaders
         ).then(res => {
           let result = res.data.result;
-          this.$set(this.detailList[index],'data',result)
+          this.detailList[index] = []
+          this.detailList[index].data = result
+          console.log(this.detailList)
+          this.showFlag = true
+          // this.$set(this.detailList[index],'data',result)
         })
     },
     switchTab (index) {
-        this.activeItem = index        
+        this.activeItem = index
+        let sta = this.tabList[this.activeItem].status
+        this.$refs.mySwiper.swiper.slideTo(index, 0)
+        this.showFlag = false
+        this.getOrderByStatus(sta, this.activeItem)      
+    },
+    swiperEnd() {
+      let index = this.$refs.mySwiper.swiper.activeIndex
+      this.activeItem = index
+      let sta = this.tabList[this.activeItem].status
+      this.$refs.mySwiper.swiper.slideTo(index, 0)
+      this.showFlag = false
+      this.getOrderByStatus(sta, this.activeItem)      
     }
   }
 }
@@ -129,10 +149,11 @@ export default {
         background-color: #fff;
         display: flex;
         height: 60px;
+        margin-top: 50px;
         justify-content: space-around;
         align-items: center;
-        width: 346px;
-        margin-left: 14px;
+        width: 94vw;
+        margin-left: 3vw;
         // margin-top: 10rpx;
     }
     .tab-list .ta-li {

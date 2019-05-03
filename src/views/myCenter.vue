@@ -114,7 +114,8 @@ export default {
 @import '../assets/styles/global';
    .wrapper{
        background-color: #e2e2e2;
-       height:100vh;
+       height:calc(100vh - 50px);
+       overflow-y: auto;
        font-family:microsoft yahei;
        padding-top: 10px;
        box-sizing: border-box;
@@ -124,13 +125,15 @@ export default {
    }
    .section.section1{
        margin-top: 40px;
+       height: 200px;
    }
    .section {       
-        width: px2rem(346);
-        margin-left: px2rem(14);
+        width: 94vw;
+        margin-left: 3vw;
         border: 1px solid #FAFAFA;
         border-radius: px2rem(10);
         margin-top: 10px;
+        margin-bottom: 10px;
         box-shadow: 1px 1px 25rx #cccccc;
         background-color: #fff;
    }
@@ -139,20 +142,20 @@ export default {
 //    }
    .img {
        border-radius: 10px;
-       width: 346px;
+       width: 94vw;
        height: 200px;
    }
    .avata-container {
-       width: 75px;
-       height: 75px;
+       width: 76px;
+       height: 76px;
        border-radius: 37px;
        background-color: #fff;
        display: flex;
        justify-content: center;
        align-items: center;
-       position: absolute;
-       left:150px;
-       top:72px;
+       position: relative;
+       left:calc(47vw - 38px);
+       top:-150px;
    }
    .avata-container .avata{
        width: 70px;
@@ -161,10 +164,10 @@ export default {
        background-color: #fff;
    }
    .section1 .text {
-       position: absolute;
-       top:155px;
-       width: 375px;
-       left: 0;
+       position: relative;
+       top:-145px;
+       width: 94vw;
+    //    left: 0;
        text-align: center;
        font-size: 16px;
    }

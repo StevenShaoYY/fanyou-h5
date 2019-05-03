@@ -31,7 +31,7 @@
       margin-left: 12px;
     }
     .item-container {
-      width: 554rpx;
+      width: 90%;
       text-align: left;
       margin-left: 12px;
       margin-top: 15px;
@@ -39,6 +39,7 @@
     .item-container .title {
       padding-right: 10px;
       font-size: 15px;
+      width: 70%;
       font-weight: 400;
       white-space:nowrap;
       text-overflow: ellipsis;

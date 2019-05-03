@@ -1,6 +1,7 @@
 <!--  -->
 <template>
   <div>
+    <header-bar></header-bar>
     <div class="container" :style="divStyle">
       <section class="header">
           <swiper class="goodsimgs" direction="horizontal" :option="swiperOption" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
@@ -132,12 +133,15 @@ import mixins from '../mixins'
 import {axiosHeaders} from "@/assets/api" 
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import LoginDialog from '../components/loginDialog.vue';
+import HeaderBar from '../components/headerBar.vue';
+import { Toast } from 'mint-ui';
 export default {
   name: 'goodsDetail',
   mixins: [mixins], 
 
   components: {
     swiper,
+    HeaderBar,
     swiperSlide,
     LoginDialog
   },
@@ -623,6 +627,9 @@ export default {
         text-align: left;
     }
     .container {
+        height: calc(100vh - 100px);
+        overflow-y: auto;
+        margin-top: 50px;
         background-color: #ffffff;
         font-family:microsoft yahei;
     }
@@ -631,8 +638,8 @@ export default {
         height: 45px;
         justify-content: space-around;
         align-items: center;
-        width: 346px;
-        margin-left: 14px;
+        width: 94vw;
+        margin-left: 3vw;
     }
     .tab-list .ta-li {
         font-size: 14px;
@@ -664,8 +671,9 @@ export default {
     .goodsimgs {
         width:225px;
         height: 225px;
-        margin-left: 60px;
-        margin-top: 10px;
+        // margin-left: 60px;
+        // margin-top: 10px;
+        margin: 10px auto;
         overflow: hidden;
     }
     .goodsimgs .image{

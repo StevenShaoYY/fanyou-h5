@@ -1,7 +1,7 @@
 <!-- D:\jz\src\pages\mycollect -->
 <template>
     <div class="wrapper">
-        <mt-header fixed title="凡有e租"></mt-header>
+        <header-bar></header-bar>
         <productl v-for="item of categoryList" :key="item.id" :productItem="item"></productl>
         <div class="comment-container no-comment-container" v-if="categoryList.length==0">
             <div class="no-comment">暂无收藏</div>
@@ -11,13 +11,15 @@
 
 <script>
 import Product2 from '../components/product2.vue';
-import {axiosHeaders} from "@/assets/api"
+import {axiosHeaders} from "@/assets/api";
+import HeaderBar from '../components/headerBar.vue';
 import axios from 'axios'
 export default {
   name: '',
 
   components: {
-      'productl': Product2
+      'productl': Product2,
+      HeaderBar
   },
   data () {
       return {
@@ -73,6 +75,7 @@ export default {
     margin-top: px2rem(15);
     margin-left: 3vw;
     line-height: px2rem(15);
+    padding-top: 40px;
 }
 .no-comment-container {
     min-height: calc(100vh - 60px);
