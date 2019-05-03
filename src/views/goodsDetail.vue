@@ -107,7 +107,7 @@
                     </div>
                     <div v-if="goodsDetail.finaceList.length>0" class="yiwao-container">
                         <div>意外保障<span class="sub">什么是意外保障？</span>
-                            <a class="fa-qa" href="/pages/finaceques/index" >
+                            <a class="fa-qa" href="/finaceques" >
                                 <img class="img" src="../assets/images/question.png" background-size="cover" />
                             </a>
                         </div>
