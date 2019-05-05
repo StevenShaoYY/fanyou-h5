@@ -119,17 +119,17 @@
           paySuccess() {
                 this.showPopFlag = false
                 this.toast('支付成功！')
-                this.redirectToAddress('/pages/orderList/index')
+                this.redirectToAddress('/orderList')
           },
           payFail() {
                 this.showPopFlag = false
                 this.toast('支付失败！请重新支付！')
-                this.redirectToAddress('/pages/orderList/index')
+                this.redirectToAddress('/orderList')
           },
           payUnknow() {
                 this.showPopFlag = false
                 this.toast('支付处理中！')
-                this.redirectToAddress('/pages/orderList/index')
+                this.redirectToAddress('/orderList')
             },
             confiremOrder() {
                 if(this.$mp.platform == 'alipay') {
@@ -158,16 +158,9 @@
                     });
                 }
             },
-          redirectToAddress(url) {
-                if(this.$mp.platform === 'alipay') {
-                    my.redirectTo({
-                        url: url
-                    })
-                } else {
-                    wx.redirectTo({
-                        url: url
-                    })
-                }
+            redirectToAddress(url) {
+              this.$router.replace(url)
+             
             },
             cancleOrder() {
               let order = this.data.orderId
@@ -207,18 +200,10 @@
                 }
             },
           gotoDetail() {
-            this.$router.push(`/orderDetail/index?id=${this.data.orderId}`)
+            this.$router.push(`/orderDetail?id=${this.data.orderId}`)
           },
           payRest() {
-            if(this.$mp.platform=='alipay'){
-              my.navigateTo({
-                url: `/pages/payrest/index?id=${this.data.orderId}`
-              })
-            } else {
-              wx.navigateTo({
-                url: `/pages/payrest/index?id=${this.data.orderId}`
-              })
-            }
+            this.$router.push(`/payrest?id=${this.data.orderId}`)
           },
           payAtOnce() {
             this.showPopFlag = true
@@ -227,15 +212,7 @@
             this.showPopFlag = false
           },
           returnOrder() {
-            if(this.$mp.platform == 'alipay') {
-              my.navigateTo({
-                url: `/pages/returnDevice/index?orderId=${this.orderId}`
-              })
-            } else {
-              wx.navigateTo({
-                  url: `/pages/returnDevice/index?orderId=${this.orderId}`
-              })
-            }
+            this.$router.push(`/returnDevice?orderId=${this.orderId}`)
           }
         }
     }

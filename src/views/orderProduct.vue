@@ -9,7 +9,7 @@
     </ul>
     <swiper :options="swiperOption" @slideChangeTransitionEnd="swiperEnd" ref="mySwiper" class="homeSwiper">
       <swiper-slide class="orderSwiperSlide" v-for="(item, i) in detailList" :key="i" >
-        <div class="comment-container has-comment" v-if="item.data.length>0&& showFlag==true">
+        <div class="or-container has-comment" v-if="item.data.length>0&& showFlag==true">
             <order-card v-for="(item1, index1) of item.data" :key="index1" :data="item1" @fresh="refreshPage"></order-card>
         </div>
         <div class="no-order-container" v-if="item.data.length==0 && showFlag==true">
@@ -140,6 +140,10 @@ export default {
 
 </script>
 <style lang='scss' scoped>
+  .or-container{
+    height: calc(100vh - 110px);
+    overflow-y: auto;
+  }
   .container{
         background-color: #fff;
         font-family:microsoft yahei;

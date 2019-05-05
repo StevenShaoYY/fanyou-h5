@@ -5,9 +5,12 @@ import router from "./router";
 import store from "./store";
 import MintUI from "mint-ui";
 import { Toast } from 'mint-ui';
+import { Checkbox, CheckboxGroup } from 'vant';
+import 'vant/lib/index.css';
 import "mint-ui/lib/style.css";
 import "@/assets/styles/global.scss"
 Vue.use(MintUI);
+Vue.use(Checkbox).use(CheckboxGroup);
 Vue.prototype.$axios = axios;
 
 Vue.prototype.toast = (msg) => {

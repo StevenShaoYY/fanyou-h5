@@ -79,6 +79,26 @@ export default new Router({
             }
         },
         {
+            path: "/placeOrder",
+            name: "placeOrder",
+            component: () =>
+                import ("./views/placeOrder.vue"),
+            meta: {
+                title: '确认订单',
+                showBottomTabBar: false
+            }
+        },
+        {
+            path: "/orderDetail",
+            name: "orderDetail",
+            component: () =>
+                import ("./views/orderDetail.vue"),
+            meta: {
+                title: '订单详情',
+                showBottomTabBar: false
+            }
+        },
+        {
             path: "/addressManage",
             name: "addressManage",
             component: () =>
@@ -136,16 +156,6 @@ export default new Router({
                 import ("./views/orderProduct.vue"),
             meta: {
                 title: '订单',
-                showBottomTabBar: false
-            }
-        },
-        {
-            path: "/aboutUs",
-            name: "aboutUs",
-            component: () =>
-                import ("./views/aboutUs.vue"),
-            meta: {
-                title: '关于我们',
                 showBottomTabBar: false
             }
         },

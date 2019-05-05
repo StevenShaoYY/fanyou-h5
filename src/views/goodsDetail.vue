@@ -56,7 +56,7 @@
                     <comment-card v-for="(item, index) of commentList" :key="index" :commentItem="item"></comment-card>
                 </div>
                 <div class="comment-container no-comment-container" v-if="commentList.length==0">
-                    <div class="no-comment">暂无评论</div>
+                    <div class="no-comment" style="font-size:18px;">暂无评论</div>
                 </div>
             </div>
         </div>
@@ -471,11 +471,19 @@ export default {
             this.showLogin=true
             return
         }
-        this.$axios.post('/user/getSimpleInfo',
+        this.$axios.post('/user/userBase/getSimpleInfo',
           '',
           axiosHeaders
         ).then(res => {
-          console.log('res: ', res);          
+            let result = res.data.result;
+            // if(result.isIdCardFront){
+            if(true){
+                let url = `/placeOrder?id=${this.$route.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+                this.$router.push(url)
+            } else {
+                let url = `/realName?id=${this.$route.query.id}&guige=${proGuige}&rentTime=${this.hasRentSelected}&finace=${finaceSelected}`
+                this.$router.push(url)
+            }   
         })
         // this.POST('userBase/getSimpleInfo', '', res => {
         //     let result = res.data.result;
