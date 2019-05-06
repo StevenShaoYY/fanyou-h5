@@ -258,21 +258,6 @@ export default {
           //     }
           // }
         })
-        // this.POST('userBase/v1.2/setAuth?isAuth=true', dto, res => {
-        //     this.userAuthed = true;
-        //     this.userNoAuth = false;
-        //     if(this.backUrl!==false) {
-        //         if(this.$mp.platform === 'alipay') {
-        //             my.redirectTo({
-        //                 url: this.backUrl1
-        //             })
-        //         } else {
-        //             wx.redirectTo({
-        //                 url: this.backUrl1
-        //             })
-        //         }
-        //     }
-        // },'user')
     },
     getUserInfo() {
         this.$axios.post('/user/userBase/getSimpleInfo',
