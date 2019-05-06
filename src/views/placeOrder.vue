@@ -41,7 +41,7 @@
             <!-- <div class="input-emergency-container"> -->
                 <!-- <p class="_p">电话</p>
                 <input class="input" type="text" v-model= "submitInfo.emergencyPhone" placeholder="电话"> -->
-                <mt-field label="用户名" placeholder="请输入电话" type="tel" v-model="submitInfo.emergencyPhone"></mt-field>
+                <mt-field label="电话" placeholder="请输入电话" type="tel" v-model="submitInfo.emergencyPhone"></mt-field>
             <!-- </div> -->
             <!-- <div class="input-emergency-container"> -->
                 <!-- <p class="_p">姓名</p>

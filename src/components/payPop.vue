@@ -140,6 +140,7 @@
             selectPayWay(index){
                 this.selectPay = index
             },
+
           payAtOnce() {
             let ddto = {
               'orderId': this.orderId
@@ -154,19 +155,44 @@
                 this.showPay = true
             })
           },
+          payWeixin(){
+            let payDto = {
+                "amount": this.payInfo.amount,
+                "payInfo": this.payInfo.note,
+                "planIdList": [],
+                "tradeOrderId": this.orderId
+            }
+            this.$axios.post('/mall/api/wxpay/v1.0/wxpayH5Create',
+                payDto,
+                axiosHeaders
+            ).then(res => {
+                console.log(res)
+            })
+          },
+          payAli() {
+            let payDto = {
+                "amount": this.payInfo.amount,
+                "payInfo": this.payInfo.note,
+                "planIdList": [],
+                "tradeOrderId": this.orderId
+            }
+            this.$axios.post('/mall/api/pay/alipayWAPCreate',
+                payDto,
+                axiosHeaders
+            ).then(res => {
+                const div = document.createElement('div')
+                div.innerHTML = res.data.result
+                document.body.appendChild(div)
+                document.forms[0].submit()
+            })
+          },
           payOrder() {
-                let payDto = {
-                    "amount": this.payInfo.amount,
-                    "payInfo": this.payInfo.note,
-                    "planIdList": [],
-                    "tradeOrderId": this.orderId
-                }
-                this.$axios.post('/mall/api/wxpay/v1.0/wxpayH5Create',
-                    payDto,
-                    axiosHeaders
-                ).then(res => {
-                    console.log(res)
-                })
+            if(this.selectPay == 1) {
+                this.payAli()
+            } else {
+                this.payWeixin()
+            }
+                
                 // this.POST('api/pay/alipayCreateApplet', payDto, res => {
                 //     let result = res.data.result;
                     // if(this.$mp.platform === 'alipay') {
