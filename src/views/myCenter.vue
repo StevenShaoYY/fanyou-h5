@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="section">
-            <div class="my-set-container" @click="goToUrl('/pages/realName/index')">
+            <div class="my-set-container" @click="goToUrl('/realName')">
                 <img class="icon" src="@/assets/images/icon_massage_mine.png" alt="">
                 <div class="set-text">实名认证</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">

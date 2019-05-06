@@ -129,6 +129,16 @@ export default new Router({
             }
         },
         {
+            path: "/realName",
+            name: "realName",
+            component: () =>
+                import ("./views/realName.vue"),
+            meta: {
+                title: '实名认证',
+                showBottomTabBar: false
+            }
+        },
+        {
             path: "/returnDeviceConfirm",
             name: "returnDeviceConfirm",
             component: () =>

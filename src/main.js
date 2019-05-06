@@ -9,6 +9,17 @@ import { Checkbox, CheckboxGroup } from 'vant';
 import 'vant/lib/index.css';
 import "mint-ui/lib/style.css";
 import "@/assets/styles/global.scss"
+import { RadioGroup, Radio } from 'vant';
+import { Field } from 'vant';
+import { Cell, CellGroup } from 'vant';
+import { Uploader } from 'vant';
+
+Vue.use(Uploader);
+Vue.use(Cell).use(CellGroup);
+Vue.use(Field);
+
+Vue.use(RadioGroup);
+Vue.use(Radio);
 Vue.use(MintUI);
 Vue.use(Checkbox).use(CheckboxGroup);
 Vue.prototype.$axios = axios;

@@ -321,7 +321,7 @@ export default {
     .wrapper_out{
         background-color: #ffffff;
         font-family:microsoft yahei;
-        height: calc(100vh - 150px);
+        height: calc(100vh - 220px);
         width: 100vw;
         // margin-left: 3vw;
         overflow-y: auto;
@@ -441,6 +441,7 @@ export default {
     }
     .emergency-container .title {
         font-size: 15px;
+        line-height: 60px;
         font-weight: 400;
     }
     // .emergency-container .input-emergency-container {
@@ -490,6 +491,7 @@ export default {
     .bottom-container{
         position: fixed;
         bottom: 0;
+        width: 100%;
         height: 100px;
         background-color: #f9f9f9
     }
