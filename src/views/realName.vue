@@ -238,7 +238,7 @@ export default {
             "certName": this.submitInfo.certName,
             "certNo": this.submitInfo.certNo
         }
-        this.$axios.post('/mall/api/certification/certificationInitializeApp',
+        this.$axios.post('/mall/api/certification/certificationInitializeH5',
           dto,
           axiosHeaders
         ).then(res => {
