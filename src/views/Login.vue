@@ -43,7 +43,10 @@ export default {
           axiosHeaders
         ).then(res => {
           // let result = res.data.result;
-          console.log('res: ', res)
+          if(res.data.ok == true)
+            this.toast(res.data.result)
+          else
+            this.toast(res.data.msg)
         })
       }else{
         let instance = Toast('请输入手机号');
@@ -69,6 +72,8 @@ export default {
             localStorage.setItem('ACCESS_TOKEN', result.accessToken);
             // return;
             this.$router.push("/index")
+          } else {
+            let instance = Toast(res.data.msg);
           }
         })
       }else{

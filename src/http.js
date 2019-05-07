@@ -40,22 +40,26 @@ axios.interceptors.response.use(response => {
 }, error => {
     // 错误提醒
     // endLoading();
-    console.log('error: ', error)
-    console.log('error.response: ', error.response)
+    console.log(error.response)
         // Message.error(error.response.data);
-
-    // 获取错误状态码
-    const { status, data } = error.response;
-    console.log('status: ', status)
-    if (!data.ok) {
-        // Message.error(status.data.msg);
-        Toast('数据异常: ' + data.msg)
-            // alert('数据异常: ' + data.msg)
-            // 清除token
-            // localStorage.removeItem('ACCESS_TOKEN');
-            // 跳转到登录页面
-            // router.push("/login")
+    if (error.response && error.response.data && error.response.data.msg == 'ACCESS_TOKEN无对应信息') {
+        Toast('登录信息过期，请重新登录')
+        router.push('login')
+    } else {
+        Toast('数据异常: ' + error)
     }
+    // 获取错误状态码
+    // const { status, data } = error.response;
+    // console.log('status: ', status)
+    // if (!data.ok) {
+    //     // Message.error(status.data.msg);
+
+    // alert('数据异常: ' + data.msg)
+    // 清除token
+    // localStorage.removeItem('ACCESS_TOKEN');
+    // 跳转到登录页面
+    // router.push("/login")
+    // }
 
     return Promise.reject(error)
 })

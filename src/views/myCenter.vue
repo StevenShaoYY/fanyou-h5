@@ -11,19 +11,19 @@
                 <img class="avata" :src="userInfo.avatar" background-size="cover" />
             </div>
             <div class="text" v-if="!userInfo.nickName">
-                未登录
+                {{userName}}
             </div>
             <div class="text" v-if="userInfo.nickName">
                 {{userInfo.nickName}}
             </div>
         </div>
         <div class="section">
-            <div class="my-set-container" @click="goToUrl('/realName')">
+            <div class="my-set-container" @click="goToUrl('realName')">
                 <img class="icon" src="@/assets/images/icon_massage_mine.png" alt="">
                 <div class="set-text">实名认证</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
             </div>
-            <div class="my-set-container" @click="goToUrl('addressManage?from=order')">
+            <div class="my-set-container" @click="goToUrl('/addressManage')">
                 <img class="icon2" src="@/assets/images/ic_address.png" alt="">
                 <div class="set-text">地址管理</div>
                 <img class="right" src="@/assets/images/btn_next_mine.png" alt="">
@@ -72,7 +72,8 @@ export default {
   data () {
     return {
         showLogin: false,
-        userInfo: {}
+        userInfo: {},
+        userName:'未登录'
     }
   },
 
@@ -81,6 +82,9 @@ export default {
   watch: {},
 
   created () {
+    //   if(this.checkLogin()) {
+    //       this.userName = '已登录'
+    //   }
   },
 
   mounted () {},

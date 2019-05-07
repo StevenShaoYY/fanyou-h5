@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "lrz": "^4.9.40",
     "mint-ui": "^2.2.13",
     "vant": "^1.6.17",
     "vue": "^2.6.6",

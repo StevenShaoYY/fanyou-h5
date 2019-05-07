@@ -105,6 +105,7 @@ import {axiosHeaders} from "@/assets/api";
 import HeaderBar from '../components/headerBar.vue';
 import img1 from '@/assets/images/btn_upload_face.png'
 import img2 from '@/assets/images/btn_upload_back.png'
+import lrz from 'lrz/dist/lrz.bundle.js'
 export default {
   name: '',
 
@@ -310,42 +311,52 @@ export default {
         });
     },
     addPositive(file) {
-      let dt = new FormData()
-      dt.append('file',file.file)
-      this.$axios.post('/user/userBase/idCard/front',
-          dt,
-          {headers: {'Content-Type': 'multipart/form-data'}}
-        ).then(res => {
-          console.log(res)
-          let result = JSON.parse(res.data);
-          if(result.ok===true) {
-              this.imgPositive.src = this.imgUrl;
-              this.imgPositive.isOk = true;
-              this.frontUploaded = true
-              this.checkStatus();
-          } else {
-              this.toast(result.msg)
-          }
-        })
+        lrz(file.file).then(rst => {
+            let dt = new FormData()
+            // dt.append('file',file.file)
+            dt.append('file',rst.file)
+            this.$axios.post('/user/userBase/idCard/front',
+                dt,
+                {headers: {'Content-Type': 'multipart/form-data'}}
+                ).then(res => {
+                console.log(res)
+                let result = JSON.parse(res.data);
+                if(result.ok===true) {
+                    this.imgPositive.src = this.imgUrl;
+                    this.imgPositive.isOk = true;
+                    this.frontUploaded = true
+                    this.checkStatus();
+                } else {
+                    this.toast(result.msg)
+                }
+            })
+        }).catch(err => {
+            console.log(err)
+        })     
     },
     addNegative(file) {
-      let dt = new FormData()
-      dt.append('file',file.file)
-      this.$axios.post('/user/userBase/idCard/back',
-          dt,
-          {headers: {'Content-Type': 'multipart/form-data'}}
-        ).then(res => {
-          console.log(res)
-          let result = JSON.parse(res.data);
-          if(result.ok===true) {
-              this.imgNegative.src = this.imgUrl;
-              this.imgNegative.isOk = true;
-              this.backUploaded = true
-              this.checkStatus();
-          } else {
-              this.toast(result.msg)
-          }
-        })
+        lrz(file.file).then(rst => {
+            let dt = new FormData()
+            dt.append('file',rst.file)
+            console.log(rst)
+            this.$axios.post('/user/userBase/idCard/back',
+                dt,
+                {headers: {'Content-Type': 'multipart/form-data'}}
+                ).then(res => {
+                console.log(res)
+                let result = JSON.parse(res.data);
+                if(result.ok===true) {
+                    this.imgNegative.src = this.imgUrl;
+                    this.imgNegative.isOk = true;
+                    this.backUploaded = true
+                    this.checkStatus();
+                } else {
+                    this.toast(result.msg)
+                }
+            })
+        }).catch(err => {
+            console.log(err)
+        })     
     },
     checkStatus() {
         if(this.imgPositive.isOk == true && this.imgNegative.isOk == true) {

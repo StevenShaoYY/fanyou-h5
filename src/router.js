@@ -16,11 +16,8 @@ export default new Router({
         {
             path: "/about",
             name: "about",
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
             component: () =>
-                import ( /* webpackChunkName: "about" */ "./views/About.vue")
+                import ("./views/About.vue")
         },
         {
             path: "/index",
@@ -129,16 +126,6 @@ export default new Router({
             }
         },
         {
-            path: "/realName",
-            name: "realName",
-            component: () =>
-                import ("./views/realName.vue"),
-            meta: {
-                title: '实名认证',
-                showBottomTabBar: false
-            }
-        },
-        {
             path: "/returnDeviceConfirm",
             name: "returnDeviceConfirm",
             component: () =>
@@ -149,16 +136,16 @@ export default new Router({
             }
         },
 
-        {
-            path: "/identityAuth",
-            name: "identityAuth",
-            component: () =>
-                import ("./views/identityAuth.vue"),
-            meta: {
-                title: '身份认证',
-                showBottomTabBar: false
-            }
-        },
+        // {
+        //     path: "/identityAuth",
+        //     name: "identityAuth",
+        //     component: () =>
+        //         import ("./views/identityAuth.vue"),
+        //     meta: {
+        //         title: '身份认证',
+        //         showBottomTabBar: false
+        //     }
+        // },
         {
             path: "/orderProduct",
             name: "orderProduct",
@@ -206,6 +193,16 @@ export default new Router({
                 import ("./views/myComment.vue"),
             meta: {
                 title: '我的评论',
+                showBottomTabBar: false
+            }
+        },
+        {
+            path: "/realName",
+            name: "realName",
+            component: () =>
+                import ("./views/realName.vue"),
+            meta: {
+                title: '实名认证',
                 showBottomTabBar: false
             }
         }
