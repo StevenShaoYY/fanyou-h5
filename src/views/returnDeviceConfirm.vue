@@ -52,6 +52,7 @@
 
 <script>
 import mixins from '../mixins'
+import {axiosHeaders} from "@/assets/api" 
 export default {
   name: 'returnDeviceConfirm',
   mixins: [mixins], 
@@ -111,7 +112,10 @@ export default {
                     ...this.returnData,
                     "orderId": this.orderId
                 }
-                this.POST('api/tradeOrder/back', dto, res => {
+                this.$axios.post('/mall/api/tradeOrder/back',
+                    dto,
+                    axiosHeaders
+                ).then(res => {
                     let result = res.data.result;
                     if (result){
                         this.toast('归还成功！')
@@ -122,15 +126,7 @@ export default {
                 });
             },
             nextStep() {
-                if(this.$mp.platform == 'alipay') {
-                    my.redirectTo({
-                        url: '/pages/orderList/index'
-                    })
-                    } else {
-                    wx.redirectTo({
-                        url: '/pages/orderList/index'
-                    })
-                }
+                this.$router.push('/orderList')
             }
         
   }

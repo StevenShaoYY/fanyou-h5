@@ -105,7 +105,7 @@ import {axiosHeaders} from "@/assets/api";
 import HeaderBar from '../components/headerBar.vue';
 import img1 from '@/assets/images/btn_upload_face.png'
 import img2 from '@/assets/images/btn_upload_back.png'
-import lrz from 'lrz/dist/lrz.bundle.js'
+import lrz from 'lrz/dist/lrz.all.bundle.js'
 export default {
   name: '',
 

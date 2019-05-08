@@ -86,6 +86,7 @@ export default {
   methods: {
     refreshPage() {
         let sta = this.tabList[this.activeItem].status
+        this.showFlag = false
         this.getOrderByStatus(sta ,this.activeItem)
     },
     getOrderData () {

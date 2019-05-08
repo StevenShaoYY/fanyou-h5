@@ -86,6 +86,7 @@
 </style>
 <script>
   import PayPop from './payPop.vue'
+  import {axiosHeaders} from "@/assets/api";
   import OrderProduct from './orderProduct.vue';
   import mixins from '../mixins'
   import Vue from 'vue';
@@ -131,73 +132,45 @@
                 this.toast('支付处理中！')
                 this.redirectToAddress('/orderList')
             },
-            confiremOrder() {
-                if(this.$mp.platform == 'alipay') {
-                    my.confirm({
-                        title: '温馨提示',
-                        content: '确定要收货吗？',
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        success: (result) => {
-                            this.POST('api/tradeOrder/arriveConfirm', {"orderId": this.$mp.query.id}, res => {
-                                this.$emit('fresh')                                
-                            });
-                        },
-                    });
-                } else {
-                    wx.showModal({
-                        title: '温馨提示',
-                        content: '确定要收货吗？',
-                        confirmText: '确定',
-                        cancelText: '取消',
-                        success: (result) => {
-                            this.POST('api/tradeOrder/arriveConfirm', {"orderId": this.$mp.query.id}, res => {
-                                this.$emit('fresh')                               
-                            });
-                        },
-                    });
-                }
+          confiremOrder() {
+              let order = this.orderId
+              this.Dialog.confirm({
+                title: '温馨提示',
+                message: '确定要收货吗？',
+                cancelButtonText:'取消',
+                confirmButtonText:'确定'
+              }).then(() => {
+                this.$axios.post('mall/api/tradeOrder/arriveConfirm',
+                  {"orderId": order},
+                  axiosHeaders
+                ).then(res => {
+                  this.$emit('fresh')
+                })
+              }).catch(() => {
+                // on cancel
+              });
             },
             redirectToAddress(url) {
               this.$router.replace(url)
              
             },
             cancleOrder() {
-              let order = this.data.orderId
-                if(this.$mp.platform == 'alipay') {
-                    my.confirm({
-                        title: '温馨提示',
-                        content: '确定要取消订单吗？',
-                        confirmButtonText: '取消订单',
-                        cancelButtonText: '暂不需要',
-                        success: (result) => {
-                            if(result.confirm) {
-                                this.POST('api/tradeOrder/cancel', {"orderId": order}, res => {
-                                    this.$emit('fresh')                                  
-                                });
-                            } else {
-                                return
-                            }
-                        },
-                    });
-                } else {
-                    wx.showModal({
-                        title: '温馨提示',
-                        content: '确定要取消订单吗？',
-                        confirmText: '取消订单',
-                        cancelText: '暂不需要',
-                        success: (result) => {
-                            if(result.comfirm) {
-                                this.POST('api/tradeOrder/cancel', {"orderId": order}, res => {
-                                   this.$emit('fresh')                                 
-                                });
-                            } else {
-                                return
-                            }
-                            
-                        },
-                    });
-                }
+              let order = this.orderId
+              this.Dialog.confirm({
+                title: '温馨提示',
+                message: '确定要取消订单吗？',
+                cancelButtonText:'暂不需要',
+                confirmButtonText:'取消订单'
+              }).then(() => {
+                this.$axios.post('mall/api/tradeOrder/cancel',
+                  {"orderId": order},
+                  axiosHeaders
+                ).then(res => {
+                  this.$emit('fresh')
+                })
+              }).catch(() => {
+                // on cancel
+              });
             },
           gotoDetail() {
             this.$router.push(`/orderDetail?id=${this.data.orderId}`)

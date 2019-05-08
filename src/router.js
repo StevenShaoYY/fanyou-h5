@@ -96,6 +96,16 @@ export default new Router({
             }
         },
         {
+            path: "/payrest",
+            name: "payRest",
+            component: () =>
+                import ("./views/payRest.vue"),
+            meta: {
+                title: '缴纳余款',
+                showBottomTabBar: false
+            }
+        },
+        {
             path: "/addressManage",
             name: "addressManage",
             component: () =>

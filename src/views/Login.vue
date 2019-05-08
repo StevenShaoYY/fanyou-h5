@@ -1,8 +1,8 @@
 <!--  -->
 <template>
   <div class="login">
-    <div class="headSculpture"></div>
-    <div class="loginTxt">登录/注册</div>
+    <!-- <div class="headSculpture"></div> -->
+    <div class="loginTxt">进入凡有e租</div>
     <div class="form">
       <mt-field placeholder="请输入手机号" v-model="mobile"></mt-field>
     </div>
@@ -113,10 +113,14 @@ export default {
     border: 1px #999 solid;
   }
   .loginTxt{
+    margin-top: 20vh;
+    margin-bottom: 5vh;
     height: px2rem(30);
     line-height: px2rem(30);
     font-size: px2rem(18);
-    text-align: center;
+    text-align: left;
+    padding-left: 15%;
+    font-weight: 700;
   }
   .form{
     margin: 0 px2rem(16);

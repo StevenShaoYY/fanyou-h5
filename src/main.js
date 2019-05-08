@@ -13,7 +13,9 @@ import { RadioGroup, Radio } from 'vant';
 import { Field } from 'vant';
 import { Cell, CellGroup } from 'vant';
 import { Uploader } from 'vant';
+import { Dialog } from 'vant';
 
+Vue.use(Dialog);
 Vue.use(Uploader);
 Vue.use(Cell).use(CellGroup);
 Vue.use(Field);
@@ -23,10 +25,12 @@ Vue.use(Radio);
 Vue.use(MintUI);
 Vue.use(Checkbox).use(CheckboxGroup);
 Vue.prototype.$axios = axios;
+// Vue.prototype.lrz = lrz;
 
 Vue.prototype.toast = (msg) => {
     Toast(msg)
 }
+Vue.prototype.Dialog = Dialog
 Vue.config.productionTip = false;
 // 判断该路由是否需要登录权限
 // router.beforeEach((to) => {

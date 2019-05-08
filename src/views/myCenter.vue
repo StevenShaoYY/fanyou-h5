@@ -82,9 +82,9 @@ export default {
   watch: {},
 
   created () {
-    //   if(this.checkLogin()) {
-    //       this.userName = '已登录'
-    //   }
+      if(this.checkLogin2()) {
+          this.userName = '已登录'
+      }
   },
 
   mounted () {},
@@ -96,6 +96,13 @@ export default {
     goToUrl(url) {
         if(this.checkLogin())
             this.$router.push(url)
+    },
+    checkLogin2(){
+        if(localStorage.getItem('ACCESS_TOKEN')==''||localStorage.getItem('ACCESS_TOKEN')==null) {
+            return false
+        } else {
+            return true
+        }
     },
     checkLogin() {
         console.log(localStorage.getItem('ACCESS_TOKEN'))
