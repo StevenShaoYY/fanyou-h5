@@ -40,9 +40,10 @@ axios.interceptors.response.use(response => {
 }, error => {
     // 错误提醒
     // endLoading();
+
     console.log(error.response)
         // Message.error(error.response.data);
-    if (error.response && error.response.data && error.response.data.msg == 'ACCESS_TOKEN无对应信息') {
+    if ((error.response && error.response.data && error.response.data.msg == 'ACCESS_TOKEN无对应信息') || (error.response && error.response.data && error.response.data.msg == 'ACCESS_TOKEN已过期')) {
         Toast('登录信息过期，请重新登录')
         router.push('login')
     } else {

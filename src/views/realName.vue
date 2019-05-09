@@ -312,15 +312,15 @@ export default {
     },
     addPositive(file) {
         lrz(file.file).then(rst => {
+            console.log(rst)
             let dt = new FormData()
             // dt.append('file',file.file)
-            dt.append('file',rst.file)
-            this.$axios.post('/user/userBase/idCard/front',
+            dt.append('fileStr',rst.base64)
+            this.$axios.post('/user/userBase/v1.2/idCard/frontBase',
                 dt,
                 {headers: {'Content-Type': 'multipart/form-data'}}
                 ).then(res => {
-                console.log(res)
-                let result = JSON.parse(res.data);
+                let result = res.data
                 if(result.ok===true) {
                     this.imgPositive.src = this.imgUrl;
                     this.imgPositive.isOk = true;
@@ -337,14 +337,13 @@ export default {
     addNegative(file) {
         lrz(file.file).then(rst => {
             let dt = new FormData()
-            dt.append('file',rst.file)
+            dt.append('fileStr',rst.base64)
             console.log(rst)
-            this.$axios.post('/user/userBase/idCard/back',
+            this.$axios.post('/user/userBase/v1.2/idCard/backBase',
                 dt,
                 {headers: {'Content-Type': 'multipart/form-data'}}
                 ).then(res => {
-                console.log(res)
-                let result = JSON.parse(res.data);
+                let result = res.data
                 if(result.ok===true) {
                     this.imgNegative.src = this.imgUrl;
                     this.imgNegative.isOk = true;
