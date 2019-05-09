@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-    <header-bar></header-bar>
+    <header-bar backUrl="/myCenter"></header-bar>
     <div class="wrapper">
         <!-- v-if="userNoAuth" -->
         <van-radio-group class="radio-group" v-model="checkedRadio" @change="radioChange" v-if="userNoAuth">

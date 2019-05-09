@@ -21,6 +21,10 @@ import Star from './star.vue';
               type: String,
               default:'凡有e租'
           },
+          backUrl:{
+            type: String,
+            default:'none'
+          }
         },
         components: {
           'star': Star
@@ -31,7 +35,11 @@ import Star from './star.vue';
         },
         methods: {
             goBack () {
+              if(this.backUrl == 'none') {
                 this.$router.go(-1)
+              } else {
+                this.$router.push(this.backUrl)
+              }
             }
         }
     }
