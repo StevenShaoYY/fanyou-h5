@@ -312,9 +312,7 @@ export default {
     },
     addPositive(file) {
         lrz(file.file).then(rst => {
-            console.log(rst)
             let dt = new FormData()
-            // dt.append('file',file.file)
             dt.append('fileStr',rst.base64)
             this.$axios.post('/user/userBase/v1.2/idCard/frontBase',
                 dt,
@@ -336,9 +334,7 @@ export default {
     },
     addNegative(file) {
         lrz(file.file).then(rst => {
-            let dt = new FormData()
             dt.append('fileStr',rst.base64)
-            console.log(rst)
             this.$axios.post('/user/userBase/v1.2/idCard/backBase',
                 dt,
                 {headers: {'Content-Type': 'multipart/form-data'}}
